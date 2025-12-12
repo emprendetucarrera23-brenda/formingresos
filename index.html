@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formi Ingresos - Registro de Nuevos Usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 50%, #fef2f8 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-decoration-1 {
+            position: absolute;
+            top: -200px;
+            left: -200px;
+            width: 400px;
+            height: 400px;
+            background: rgba(55, 12, 49, 0.05);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .bg-decoration-2 {
+            position: absolute;
+            bottom: -200px;
+            right: -200px;
+            width: 400px;
+            height: 400px;
+            background: rgba(167, 139, 250, 0.1);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(55, 12, 49, 0.3);
+        }
+
+        h1 {
+            color: #370c31;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1.125rem;
+            max-width: 42rem;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(55, 12, 49, 0.1);
+            position: relative;
+            overflow: visible;
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            box-shadow: 0 8px 30px rgba(55, 12, 49, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .section-number {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 15px rgba(55, 12, 49, 0.3);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #370c31;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e9d5ff 0%, #fbcfe8 100%);
+            border: 2px solid rgba(55, 12, 49, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: #370c31;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .card {
+        position: relative;
+        z-index: 10;
+        }
+
+        .next-section {
+        position: relative;
+        z-index: 1;
+        }
+
+
+        label {
+            color: #1f2937;
+            font-weight: 500;
+            padding-left: 0.25rem;
+            font-size: 0.9375rem;
+        }
+
+        .required {
+            color: #370c31;
+            margin-left: 0.375rem;
+            font-size: 1.125rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+            color: #1f2937;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #370c31;
+            box-shadow: 0 0 0 3px rgba(55, 12, 49, 0.1);
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: rgba(55, 12, 49, 0.5);
+        }
+
+        input.error,
+        select.error,
+        textarea.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            padding-left: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 12px;
+            background-color: white;
+            padding-right: 3rem;
+            cursor: pointer;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            border-radius: 0.5rem;
+            padding: 0.375rem;
+            pointer-events: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .file-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .file-upload:hover {
+            border-color: #370c31;
+            background: linear-gradient(135deg, #faf5ff 0%, #fef2f8 100%);
+        }
+
+        .file-upload-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, #e9d5ff 0%, #fbcfe8 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-icon {
+            transform: scale(1.1);
+        }
+
+        .file-selected {
+            border: 2px solid #10b981;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 1rem;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .remove-file {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #fee2e2;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .remove-file:hover {
+            background: #fecaca;
+            transform: scale(1.1);
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #370c31 0%, #4d1145 50%, #370c31 100%);
+            color: white;
+            padding: 1.25rem 2rem;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(55, 12, 49, 0.4);
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(135deg, #4d1145 0%, #651954 50%, #4d1145 100%);
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(55, 12, 49, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* ============================================ */
+        /* ESTILOS PARA AUTOCOMPLETADO - LUGAR DE NACIMIENTO */
+        /* ============================================ */
+
+        .autocomplete-wrapper {
+            position: relative;
+            z-index: 999999;
+        }
+
+        .autocomplete-list {
+            position: absolute !important;
+            z-index: 99999999 !important;
+        }
+
+
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #370c31;
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 8px 20px rgba(55, 12, 49, 0.15);
+        }
+
+        .autocomplete-list.show {
+            display: block;
+        }
+
+        .autocomplete-item {
+            padding: 0.875rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.9375rem;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.active {
+            background: linear-gradient(135deg, #faf5ff 0%, #fef2f8 100%);
+            color: #370c31;
+            font-weight: 600;
+        }
+
+        .autocomplete-item mark {
+            background: #e9d5ff;
+            color: #370c31;
+            font-weight: 600;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        .autocomplete-no-results {
+            padding: 1rem 1.25rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* ============================================ */
+/* MEJORAS PARA EVITAR CONFLICTOS DE Z-INDEX */
+/* ============================================ */
+
+/* Asegurar que las listas de autocompletado empujen el contenido */
+.autocomplete-wrapper {
+    position: relative;
+    /* Removido z-index alto para evitar conflictos */
+}
+
+.autocomplete-list {
+    position: relative; /* Cambiado de absolute a relative */
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #370c31;
+    border-top: none;
+    border-radius: 0 0 0.75rem 0.75rem;
+    max-height: 250px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 20px rgba(55, 12, 49, 0.15);
+    margin-top: -0.75rem; /* Ajuste para que quede pegado al input */
+}
+
+.autocomplete-list.show {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 0.875rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.9375rem;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.active {
+    background: linear-gradient(135deg, #faf5ff 0%, #fef2f8 100%);
+    color: #370c31;
+    font-weight: 600;
+}
+
+.autocomplete-item mark {
+    background: #e9d5ff;
+    color: #370c31;
+    font-weight: 600;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.autocomplete-no-results {
+    padding: 1rem 1.25rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Scroll personalizado para la lista */
+.autocomplete-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.autocomplete-list::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 0 0 0.75rem 0;
+}
+
+.autocomplete-list::-webkit-scrollbar-thumb {
+    background: #370c31;
+    border-radius: 4px;
+}
+
+.autocomplete-list::-webkit-scrollbar-thumb:hover {
+    background: #5d1a51;
+}
+
+/* Input con borde redondeado especial cuando lista está abierta */
+.autocomplete-wrapper input:focus {
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.autocomplete-wrapper input:focus + input + .autocomplete-list.show {
+    border-radius: 0 0 0.75rem 0.75rem;
+}
+
+        /* Scroll personalizado para la lista */
+        .autocomplete-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .autocomplete-list::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 0 0 0.75rem 0;
+        }
+
+        .autocomplete-list::-webkit-scrollbar-thumb {
+            background: #370c31;
+            border-radius: 4px;
+        }
+
+        .autocomplete-list::-webkit-scrollbar-thumb:hover {
+            background: #5d1a51;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-grid-2,
+            .form-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .localidad-group {
+            display: none;
+        }
+
+        .localidad-group.show {
+            display: block;
+        }
+
+        .programa-group {
+            display: none;
+        }
+
+        .programa-group.show {
+            display: block;
+        }
+
+        .cesantias-group {
+            display: none;
+        }
+
+        .cesantias-group.show {
+            display: block;
+        }
+
+        .obsequio-group {
+            display: none;
+        }
+
+        .obsequio-group.show {
+            display: block;
+        }
+
+        /* ============================================ */
+        /* ESTILOS PARA TIPO DE INGRESO */
+        /* ============================================ */
+
+        .tipo-suscripcion-group {
+            display: none;
+        }
+
+        .seccion-periodo,
+        .seccion-titulacion {
+            display: none;
+        }
+
+        .seccion-periodo.show,
+        .seccion-titulacion.show {
+            display: block;
+        }
+
+        #contenidoAmericana,
+        #contenidoFundetec {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bg-decoration-1"></div>
+    <div class="bg-decoration-2"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="badge">
+               
+                <span>Registro de Nuevos Usuarios</span>
+            </div>
+            <h1>Formingresos</h1>
+            <p class="subtitle">
+                Completa el siguiente formulario con datos personales y académicos para comenzar el proceso de inscripción
+            </p>
+        </div>
+
+        <form id="mainForm" novalidate>
+            <!-- Sección 1: Datos para Suscripción -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">
+                        
+                        Datos para Suscripción
+                    </h2>
+                </div>
+
+                <div class="form-grid">
+
+                    <!-- NUEVO: Selector de tipo de ingreso -->
+                    <div class="form-group">
+                        <label>
+                            Tipo de ingreso
+                            <span class="required">*</span>
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="tipoIngreso" required>
+                                <option value="">Selecciona el tipo de ingreso</option>
+                                <option value="americana">Ingreso a Americana</option>
+                                <option value="fundetec">Ingreso a Fundetec</option>
+                            </select>
+                        </div>
+                        <span class="error-message">Por favor selecciona un tipo de ingreso</span>
+                    </div>
+
+                    <!-- REEMPLAZAR EL SELECT DE CÓDIGO DE ORIENTADOR -->
+                        <div class="form-group">
+                            <label>
+                                Código de orientador
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="codigoOrientador" required>
+                                    <option value="">Selecciona el código de tu orientador</option>
+                                    <option value="JAVIER.VEL">JAVIER.VEL</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="ALEJANDRA.MOR">ALEJANDRA.MOR</option>
+                                    <option value="ALEJANDRA.UHI">ALEJANDRA.UHI</option>
+                                    <option value="FERNANDO.SUA">FERNANDO.SUA</option>
+                                    <option value="JOHAN.FRA">JOHAN.FRA</option>
+                                    <option value="JHONATAN.FRA">JHONATAN.FRA</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="OPERADOR.UNAV">OPERADOR.UNAV</option>
+                                    <option value="OP.KONEXION.ACADEMICA">OP.KONEXION.ACADEMICA</option>
+                                    <option value="OPERADOR.IMPULSE">OPERADOR.IMPULSE</option>
+                                    <option value="OPERADOR.OSORIO">OPERADOR.OSORIO</option>
+                                    <option value="MATRÍCULAS.UNIVERSITARIAS">MATRÍCULAS.UNIVERSITARIAS</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="NICOL.CAS">NICOL.CAS</option>
+                                    <option value="DIANA.ROD">DIANA.ROD</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="ALISON.GUT">ALISON.GUT</option>
+                                    <option value="ANDREA.GON">ANDREA.GON</option>
+                                    <option value="YULI.HER">YULI.HER</option>
+                                    <option value="NAOMI.MAT">NAOMI.MAT</option>
+                                    <option value="ADA.RAN">ADA.RAN</option>
+                                    <option value="ANGIE.VIL">ANGIE.VIL</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="LUISA.QUI">LUISA.QUI</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="TANIA.NEI">TANIA.NEI</option>
+                                    <option value="LISETH.VIL">LISETH.VIL</option>
+                                    <option value="VANESSA.ABR">VANESSA.ABR</option>
+                                    <option value="SARA.BAQ">SARA.BAQ</option>
+                                    <option value="DANIELA.FOR">DANIELA.FOR</option>
+                                    <!-- Separador vacío -->
+                                    <option value="" disabled>──────────</option>
+                                    <option value="PAUL.CAM">PAUL.CAM</option>
+                                    <option value="ANDRES.MOR">ANDRES.MOR</option>
+                                    <option value="ESTEFANIA.ROD">ESTEFANIA.ROD</option>
+                                    <option value="YOHANDRA.LAB">YOHANDRA.LAB</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona un código de orientador</span>
+                        </div>
+                          <!-- Tipo de suscripción (solo visible para Americana) -->
+                    <div class="form-group tipo-suscripcion-group" style="display: none;">
+                        <label>
+                            Tipo de suscripción
+                            <span class="required">*</span>
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="tipoSuscripcion">
+                                <option value="">Selecciona el tipo de suscripción</option>
+                                <option value="Homologación">Homologación</option>
+                                <option value="Primer semestre">Primer semestre</option>
+                            </select>
+                        </div>
+                        <span class="error-message">Por favor selecciona un tipo de suscripción</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2: Información de Suscriptor -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">
+                        
+                        Información de Suscriptor
+                    </h2>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label>
+                            Nombres
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="nombres" 
+                            placeholder="Escribe solo tu primer y segundo nombre (si aplica)"
+                            minlength="3"
+                            maxlength="25"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa tu(s) nombre(s) (mínimo 3 caracteres)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Apellidos
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="apellidos" 
+                            placeholder="Escribe solo tu primer y segundo apellido (si aplica)"
+                            minlength="3"
+                            maxlength="25"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa tu(s) apellido(s) (mínimo 3 caracteres)</span>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label>
+                            Tipo de documento
+                            <span class="required">*</span>
+                        </label>
+                        <select id="tipoDocumento" required>
+                            <option value="">Selecciona el tipo</option>
+                            <option value="CC">CC - Cédula de Ciudadanía</option>
+                            <option value="TI">TI - Tarjeta de Identidad</option>
+                            <option value="CE">CE - Cédula de Extranjería</option>
+                            <option value="PEP">PEP - Permiso Especial de Permanencia</option>
+                            <option value="NUIP">NUIP - Número Único de Identificación Personal</option>
+                            <option value="PPT">PPT - Permiso por Protección Temporal</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona un tipo de documento</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Número de identificación
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="numeroIdentificacion" 
+                            placeholder="N° de Identificación sin puntos ni comas"
+                            min="1000000"
+                            max="1399999999"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa un número de identificación válido</span>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label for="lugarNacimiento">
+                            Lugar de nacimiento
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="autocomplete-wrapper">
+                            <input 
+                                type="text" 
+                                id="lugarNacimiento" 
+                                placeholder="Escribe para buscar tu lugar de nacimiento..."
+                                autocomplete="off"
+                                required
+                            >
+
+                            <!-- Campo oculto correctamente vinculado -->
+                            <input 
+                                type="hidden" 
+                                id="lugarNacimientoValue" 
+                                name="lugarNacimiento"
+                            >
+
+                            <!-- Lista de sugerencias -->
+                            <div id="lugarNacimientoList" class="autocomplete-list"></div>
+                        </div>
+
+                        <span class="error-message">Por favor selecciona tu lugar de nacimiento</span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>
+                            Fecha de nacimiento
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="date" 
+                            id="fechaNacimiento"
+                            min="1956-01-01"
+                            max="2009-01-31"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa una fecha válida (entre 1956 y 2009)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Datos Demográficos -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">
+                        
+                        Datos Demográficos
+                    </h2>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label>
+                            Ciudad de residencia
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="autocomplete-wrapper">
+                            <input 
+                                type="text" 
+                                id="ciudadResidencia" 
+                                placeholder="Escribe para buscar tu ciudad de residencia..."
+                                autocomplete="off"
+                                required
+                            >
+
+                            <!-- Campo oculto para almacenar el valor seleccionado -->
+                            <input 
+                                type="hidden" 
+                                id="ciudadResidenciaValue" 
+                                name="ciudadResidencia"
+                            >
+
+                            <!-- Lista de sugerencias -->
+                            <div id="ciudadResidenciaList" class="autocomplete-list"></div>
+                        </div>
+
+                        <span class="error-message">Por favor selecciona tu ciudad de residencia</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Dirección
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="direccion" 
+                            placeholder="Dirección de tu residencia"
+                            minlength="8"
+                            maxlength="106"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa tu dirección (8-106 caracteres)</span>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label>
+                            Barrio
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="barrio" 
+                            placeholder="Nombre del barrio"
+                            minlength="4"
+                            maxlength="25"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa tu barrio (4-25 caracteres)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Estrato
+                            <span class="required">*</span>
+                        </label>
+                        <select id="estrato" required>
+                            <option value="">Selecciona tu estrato</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona tu estrato</span>
+                    </div>
+                </div>
+
+                <div id="localidadGroup" class="localidad-group">
+                    <div class="form-group">
+                        <label>
+                            Localidad
+                            <span class="required">*</span>
+                        </label>
+                        <select id="localidad">
+                            <option value="">Selecciona la localidad donde vives</option>
+                            <option value="1. Usaquén">1. Usaquén</option>
+                            <option value="2. Chapinero">2. Chapinero</option>
+                            <option value="3. Santa Fe">3. Santa Fe</option>
+                            <option value="4. San Cristóbal">4. San Cristóbal</option>
+                            <option value="5. Usme">5. Usme</option>
+                            <option value="6. Tunjuelito">6. Tunjuelito</option>
+                            <option value="7. Bosa">7. Bosa</option>
+                            <option value="8. Kennedy">8. Kennedy</option>
+                            <option value="9. Fontibón">9. Fontibón</option>
+                            <option value="10. Engativá">10. Engativá</option>
+                            <option value="11. Suba">11. Suba</option>
+                            <option value="12. Barrios Unidos">12. Barrios Unidos</option>
+                            <option value="13. Teusaquillo">13. Teusaquillo</option>
+                            <option value="14. Los Mártires">14. Los Mártires</option>
+                            <option value="15. Antonio Nariño">15. Antonio Nariño</option>
+                            <option value="16. Puente Aranda">16. Puente Aranda</option>
+                            <option value="17. Candelaria">17. Candelaria</option>
+                            <option value="18. Rafael Uribe Uribe">18. Rafael Uribe Uribe</option>
+                            <option value="19. Ciudad Bolívar">19. Ciudad Bolívar</option>
+                            <option value="20. Sumapaz">20. Sumapaz</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona tu localidad</span>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label>
+                            Número de teléfono celular
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="telefonoCelular" 
+                            placeholder="Celular de contacto"
+                            pattern="3[0-9]{9}"
+                            minlength="10"
+                            maxlength="10"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa un número celular válido (10 dígitos, inicia con 3)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Correo electrónico
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="correoElectronico" 
+                            placeholder="ejemplo@correo.com"
+                            maxlength="50"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa un correo electrónico válido</span>
+                    </div>
+                </div>
+
+                <div class="form-grid form-grid-3">
+                    <div class="form-group">
+                        <label>
+                            Tipo de sangre
+                            <span class="required">*</span>
+                        </label>
+                        <select id="tipoSangre" required>
+                            <option value="">Selecciona</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona tu tipo de sangre</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Víctima de conflicto
+                            <span class="required">*</span>
+                        </label>
+                        <select id="victimaConflicto" required>
+                            <option value="">Selecciona</option>
+                            <option value="Sí">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona una opción</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Estado civil
+                            <span class="required">*</span>
+                        </label>
+                        <select id="estadoCivil" required>
+                            <option value="">Selecciona</option>
+                            <option value="Soltero">Soltero</option>
+                            <option value="Casado">Casado</option>
+                            <option value="Unión libre">Unión libre</option>
+                            <option value="Divorciado">Divorciado</option>
+                            <option value="Viudo">Viudo</option>
+                        </select>
+
+
+                            <span class="error-message">Por favor selecciona tu estado civil</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 4: Periodo -->
+            <div class="form-section seccion-periodo" style="display: none;">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">
+                        Periodo
+                    </h2>
+                </div>
+
+                <!-- CONTENIDO PARA AMERICANA -->
+                <div id="contenidoAmericana" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                En qué periodo vas a estudiar
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="periodoAmericana">
+                                    <option value="">Selecciona el periodo al que vas a ingresar a estudiar</option>
+                                    <option value="AMERICANA - 2026 - 1">AMERICANA - 2026 - 1</option>
+                                    <option value="AMERICANA - 2026 - 2">AMERICANA - 2026 - 2</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona un periodo</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid form-grid-2">
+                        <div class="form-group">
+                            <label>
+                                Tiempo de estudio
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="tiempoEstudioAmericana">
+                                    <option value="">Selecciona el tiempo de estudio</option>
+                                    <option value="4 Cuatrimestres">4 Cuatrimestres</option>
+                                    <option value="5 Cuatrimestres">5 Cuatrimestres</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona el tiempo de estudio</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Modalidad
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="metodologiaAmericana">
+                                    <option value="">Selecciona la modalidad de estudio</option>
+                                    <option value="Presencial (Remoto)">Presencial (Remoto)</option>
+                                    <option value="Virtual">Virtual</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona una modalidad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO PARA FUNDETEC -->
+                <div id="contenidoFundetec" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                En qué periodo vas a estudiar
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="periodoFundetec">
+                                    <option value="">Selecciona el periodo al que vas a ingresar a estudiar</option>
+                                    <option value="FUNDETEC - 2026 - 1">FUNDETEC - 2026 - 1</option>
+                                    <option value="FUNDETEC - 2026 - 2">FUNDETEC - 2026 - 2</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona un periodo</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                Tiempo de estudio
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="tiempoEstudioFundetec">
+                                    <option value="">Selecciona el tiempo de estudio</option>
+                                    <option value="4 Meses">4 Meses</option>
+                                    <option value="5 Meses">5 Meses</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona el tiempo de estudio</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Modalidad
+                                <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="metodologiaFundetec">
+                                    <option value="">Selecciona la modalidad de estudio</option>
+                                    <option value="Presencial (Remoto)">Presencial (Remoto)</option>
+                                    <option value="Virtual">Virtual</option>
+                                </select>
+                            </div>
+                            <span class="error-message">Por favor selecciona una modalidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 5: Última Titulación Obtenida -->
+            <div class="form-section seccion-titulacion" style="display: none;">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">
+                        Última Titulación Obtenida
+                    </h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            Nivel de último título
+                            <span class="required">*</span>
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="tituloObtenido">
+                                <option value="">Selecciona el último título aprobado</option>
+                                <!-- Opciones dinámicas según tipo de ingreso -->
+                            </select>
+                        </div>
+                        <span class="error-message">Por favor selecciona tu nivel de último título</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 6: Programa de Interés -->
+            <div class="form-section programa-group" style="display: none;">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">
+                        Información de Programa de Interés
+                    </h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            Programa de interés
+                            <span class="required">*</span>
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="programaInteres">
+                                <option value="">Selecciona tu programa de interés</option>
+                                <!-- Opciones dinámicas según título obtenido -->
+                            </select>
+                        </div>
+                        <span class="error-message">Por favor selecciona un programa de interés</span>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            Método de pago
+                            <span class="required">*</span>
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="metodoPago">
+                                <option value="">Selecciona la forma de pago</option>
+                                <option value="Pago de contado">Pago de contado</option>
+                                <option value="Pago a cuotas">Pago a cuotas</option>
+                                <option value="Pago con cesantías">Pago con cesantías</option>
+                            </select>
+                        </div>
+                        <span class="error-message">Por favor selecciona un método de pago</span>
+                    </div>
+                </div>
+
+                <!-- Campo condicional: Cesantías -->
+                <div id="cesantiasGroup" class="cesantias-group">
+                    <div class="form-group">
+                        <label>
+                            Valor a pagar con cesantías
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="valorCesantias" 
+                            placeholder="Ingresa el valor sin puntos ni comas"
+                            min="100000"
+                            max="4000000"
+                        >
+                        <span class="error-message">Por favor ingresa un valor entre $100,000 y $4,000,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 7: Información de Inscripción -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2 class="section-title">
+                        Información de Inscripción
+                    </h2>
+                </div>
+
+                <div class="form-grid form-grid-3">
+                    <div class="form-group">
+                        <label>
+                            Fecha de inscripción
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="date" 
+                            id="fechaPago"
+                            min="2025-01-20"
+                            max="2025-12-31"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa una fecha válida</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Forma de pago inscripción
+                            <span class="required">*</span>
+                        </label>
+                        <select id="formaPagoInscripcion" required>
+                            <option value="">Selecciona la forma</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Otorgado por">Otorgado por</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona la forma de pago</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Valor inscripción
+                            <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="valorInscripcion" 
+                            placeholder="Valor pagado"
+                            min="10000"
+                            max="440000"
+                            required
+                        >
+                        <span class="error-message">Por favor ingresa un valor entre $10,000 y $440,000</span>
+                    </div>
+                </div>
+
+                <!-- Campo condicional: Obsequio -->
+                <div id="obsequioGroup" class="obsequio-group">
+                    <div class="form-group">
+                        <label>
+                            Obsequio autorizado por
+                            <span class="required">*</span>
+                        </label>
+                        <select id="obsequioAutorizado">
+                            <option value="">Selecciona quien autorizó</option>
+                            <option value="Johan Franco">Johan Franco</option>
+                            <option value="Fernando Suarez">Fernando Suarez</option>
+                            <option value="Jhonatan Franco">Jhonatan Franco</option>
+                        </select>
+                        <span class="error-message">Por favor selecciona quien autorizó el obsequio</span>
+                    </div>
+                </div>
+
+                <!-- Subida de archivo -->
+                <div class="form-group">
+                    <label>
+                        Comprobante de inscripción
+                        <span class="required">*</span>
+                    </label>
+                    
+                    <div id="fileUploadArea" class="file-upload">
+                        <div class="file-upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#370c31" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <p style="font-weight: 600; color: #370c31; margin-bottom: 0.5rem;">Haz clic para subir el comprobante</p>
+                        <p style="font-size: 0.875rem; color: #6b7280;">PDF, PNG, JPG o JPEG (máx. 3MB)</p>
+                    </div>
+
+                    <div id="fileSelected" class="file-selected" style="display: none;">
+                        <div class="file-info">
+                            <div class="file-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                    <polyline points="13 2 13 9 20 9"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="fileName" style="font-weight: 600; color: #059669; margin-bottom: 0.25rem;"></p>
+                                <p id="fileSize" style="font-size: 0.875rem; color: #6b7280;"></p>
+                            </div>
+                        </div>
+                        <button type="button" id="removeFile" class="remove-file">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <input type="file" id="comprobanteFile" accept=".pdf,.png,.jpg,.jpeg" style="display: none;" required>
+                    <span class="error-message">Por favor adjunta el comprobante de pago</span>
+                </div>
+            </div>
+
+            <!-- Sección 8: Observaciones -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2 class="section-title">
+                        Observaciones
+                    </h2>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Observaciones adicionales
+                    </label>
+                    <textarea 
+                        id="observaciones" 
+                        placeholder="Si tienes alguna dificultad, deseas dejar otra manera de contactarte o nos quieres aclarar algo, coméntanos..."
+                        rows="5"
+                    ></textarea>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <button type="submit" class="submit-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                </svg>
+                Enviar Formulario
+            </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-box">
+                <p style="color: #6b7280; font-size: 0.875rem;">
+                    © 2025 Formi Ingresos - Todos los derechos reservados
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // VALIDACIONES Y LÓGICA DEL FORMULARIO
+        // ============================================================
+
+        const form = document.getElementById('mainForm');
+
+        // ============================================================
+        // 1. FUNCIÓN PARA VALIDAR CAMPOS INDIVIDUALES
+        // ============================================================
+        function validateField(field) {
+            const errorMessage = field.parentElement.querySelector('.error-message');
+            let isValid = true;
+            let message = '';
+
+            // Limpiar estado previo
+            field.classList.remove('error');
+            if (errorMessage) errorMessage.classList.remove('show');
+
+            // Validar campo requerido
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                isValid = false;
+                message = 'Este campo es obligatorio';
+            }
+            // Validar email
+            else if (field.type === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    isValid = false;
+                    message = 'Por favor ingresa un correo electrónico válido';
+                }
+            }
+            // Validar teléfono (debe iniciar con 3 y tener 10 dígitos)
+            else if (field.id === 'telefonoCelular' && field.value) {
+                const phoneRegex = /^3[0-9]{9}$/;
+                if (!phoneRegex.test(field.value)) {
+                    isValid = false;
+                    message = 'El número debe iniciar con 3 y tener 10 dígitos';
+                }
+            }
+            // Validar minlength
+            else if (field.hasAttribute('minlength') && field.value) {
+                if (field.value.length < parseInt(field.getAttribute('minlength'))) {
+                    isValid = false;
+                    message = `Mínimo ${field.getAttribute('minlength')} caracteres`;
+                }
+            }
+            // Validar maxlength
+            else if (field.hasAttribute('maxlength') && field.value) {
+                if (field.value.length > parseInt(field.getAttribute('maxlength'))) {
+                    isValid = false;
+                    message = `Máximo ${field.getAttribute('maxlength')} caracteres`;
+                }
+            }
+            // Validar min/max para números
+            else if (field.type === 'number' && field.value) {
+                const value = parseFloat(field.value);
+                if (field.hasAttribute('min') && value < parseFloat(field.getAttribute('min'))) {
+                    isValid = false;
+                    message = `Valor mínimo: ${field.getAttribute('min')}`;
+                }
+                if (field.hasAttribute('max') && value > parseFloat(field.getAttribute('max'))) {
+                    isValid = false;
+                    message = `Valor máximo: ${field.getAttribute('max')}`;
+                }
+            }
+            // Validar pattern
+            else if (field.hasAttribute('pattern') && field.value) {
+                const pattern = new RegExp(field.getAttribute('pattern'));
+                if (!pattern.test(field.value)) {
+                    isValid = false;
+                    message = 'El formato no es válido';
+                }
+            }
+
+            // Mostrar error si no es válido
+            if (!isValid) {
+                field.classList.add('error');
+                if (errorMessage) {
+                    errorMessage.textContent = message;
+                    errorMessage.classList.add('show');
+                }
+            }
+
+            return isValid;
+        }
+
+        // ============================================================
+        // 2. VALIDACIÓN EN TIEMPO REAL (blur)
+        // ============================================================
+        const allInputs = form.querySelectorAll('input, select, textarea');
+        allInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+        });
+
+        // ============================================================
+        // 3. LÓGICA DINÁMICA: MOSTRAR/OCULTAR CAMPOS SEGÚN SELECCIÓN
+        // ============================================================
+
+        // ============================================
+        // AUTOCOMPLETADO PARA LUGAR DE NACIMIENTO Y CIUDAD DE RESIDENCIA
+        // ============================================
+
+        const lugaresNacimiento = [
+            "El Encanto - AMAZONAS", "La Chorrera - AMAZONAS", "La Pedrera - AMAZONAS", "La Victoria - AMAZONAS", "Leticia - AMAZONAS", "Miriti - Paraná - AMAZONAS", "Puerto Alegria - AMAZONAS", "Puerto Arica - AMAZONAS", "Puerto Nariño - AMAZONAS", "Puerto Santander - AMAZONAS", "Tarapacá - AMAZONAS",
+            "Cáceres - ANTIOQUIA", "Caucasia - ANTIOQUIA", "El Bagre - ANTIOQUIA", "Nechí - ANTIOQUIA", "Tarazá - ANTIOQUIA", "Zaragoza - ANTIOQUIA", "Caracolí - ANTIOQUIA", "Maceo - ANTIOQUIA", "Puerto Berrio - ANTIOQUIA", "Puerto Nare - ANTIOQUIA", "Puerto Triunfo - ANTIOQUIA", "Yondó - ANTIOQUIA", "Amalfi - ANTIOQUIA", "Anorí - ANTIOQUIA", "Cisneros - ANTIOQUIA", "Remedios - ANTIOQUIA", "San Roque - ANTIOQUIA", "Santo Domingo - ANTIOQUIA", "Segovia - ANTIOQUIA", "Vegachí - ANTIOQUIA", "Yalí - ANTIOQUIA", "Yolombó - ANTIOQUIA", "Angostura - ANTIOQUIA", "Belmira - ANTIOQUIA", "Briceño - ANTIOQUIA", "Campamento - ANTIOQUIA", "Carolina - ANTIOQUIA", "Don Matias - ANTIOQUIA", "Entrerrios - ANTIOQUIA", "Gómez Plata - ANTIOQUIA", "Guadalupe - ANTIOQUIA", "Ituango - ANTIOQUIA", "San Andrés - ANTIOQUIA", "San José De La Montaña - ANTIOQUIA", "San Pedro - ANTIOQUIA", "Santa Rosa De Osos - ANTIOQUIA", "Toledo - ANTIOQUIA", "Valdivia - ANTIOQUIA", "Yarumal - ANTIOQUIA", "Abriaquí - ANTIOQUIA", "Anza - ANTIOQUIA", "Armenia - ANTIOQUIA", "Buriticá - ANTIOQUIA", "Cañasgordas - ANTIOQUIA", "Dabeiba - ANTIOQUIA", "Ebéjico - ANTIOQUIA", "Frontino - ANTIOQUIA", "Giraldo - ANTIOQUIA", "Heliconia - ANTIOQUIA", "Liborina - ANTIOQUIA", "Olaya - ANTIOQUIA", "Peque - ANTIOQUIA", "Sabanalarga - ANTIOQUIA", "San Jerónimo - ANTIOQUIA", "Santafé De Antioquia - ANTIOQUIA", "Sopetran - ANTIOQUIA", "Uramita - ANTIOQUIA", "Abejorral - ANTIOQUIA", "Alejandría - ANTIOQUIA", "Argelia - ANTIOQUIA", "Carmen De Viboral - ANTIOQUIA", "Cocorná - ANTIOQUIA", "Concepción - ANTIOQUIA", "Granada - ANTIOQUIA", "Guarne - ANTIOQUIA", "Guatape - ANTIOQUIA", "La Ceja - ANTIOQUIA", "La Unión - ANTIOQUIA", "Marinilla - ANTIOQUIA", "Nariño - ANTIOQUIA", "Peñol - ANTIOQUIA", "Retiro - ANTIOQUIA", "Rionegro - ANTIOQUIA", "San Carlos - ANTIOQUIA", "San Francisco - ANTIOQUIA", "San Luis - ANTIOQUIA", "San Rafael - ANTIOQUIA", "San Vicente - ANTIOQUIA", "Santuario - ANTIOQUIA", "Sonson - ANTIOQUIA", "Amaga - ANTIOQUIA", "Andes - ANTIOQUIA", "Angelopolis - ANTIOQUIA", "Betania - ANTIOQUIA", "Betulia - ANTIOQUIA", "Caicedo - ANTIOQUIA", "Caramanta - ANTIOQUIA", "Ciudad Bolívar - ANTIOQUIA", "Concordia - ANTIOQUIA", "Fredonia - ANTIOQUIA", "Hispania - ANTIOQUIA", "Jardín - ANTIOQUIA", "Jericó - ANTIOQUIA", "La Pintada - ANTIOQUIA", "Montebello - ANTIOQUIA", "Pueblorrico - ANTIOQUIA", "Salgar - ANTIOQUIA", "Santa Barbara - ANTIOQUIA", "Támesis - ANTIOQUIA", "Tarso - ANTIOQUIA", "Titiribí - ANTIOQUIA", "Urrao - ANTIOQUIA", "Valparaiso - ANTIOQUIA", "Venecia - ANTIOQUIA", "Apartadó - ANTIOQUIA", "Arboletes - ANTIOQUIA", "Carepa - ANTIOQUIA", "Chigorodó - ANTIOQUIA", "Murindó - ANTIOQUIA", "Mutata - ANTIOQUIA", "Necoclí - ANTIOQUIA", "San Juan De Uraba - ANTIOQUIA", "San Pedro De Uraba - ANTIOQUIA", "Turbo - ANTIOQUIA", "Vigía Del Fuerte - ANTIOQUIA", "Barbosa - ANTIOQUIA", "Bello - ANTIOQUIA", "Caldas - ANTIOQUIA", "Copacabana - ANTIOQUIA", "Envigado - ANTIOQUIA", "Girardota - ANTIOQUIA", "Itagui - ANTIOQUIA", "La Estrella - ANTIOQUIA", "Medellín - ANTIOQUIA", "Sabaneta - ANTIOQUIA",
+            "Arauca - ARAUCA", "Arauquita - ARAUCA", "Cravo Norte - ARAUCA", "Fortul - ARAUCA", "Puerto Rondón - ARAUCA", "Saravena - ARAUCA", "Tame - ARAUCA",
+            "Providencia Y Santa Catalina - ARCHIPIELAGO DE SAN ANDRES", "San Andres - ARCHIPIELAGO DE SAN ANDRES",
+            "Barranquilla - ATLÁNTICO", "Galapa - ATLÁNTICO", "Malambo - ATLÁNTICO", "Puerto Colombia - ATLÁNTICO", "Soledad - ATLÁNTICO", "Campo De La Cruz - ATLÁNTICO", "Candelaria - ATLÁNTICO", "Luruaco - ATLÁNTICO", "Manati - ATLÁNTICO", "Repelon - ATLÁNTICO", "Santa Lucia - ATLÁNTICO", "Suan - ATLÁNTICO", "Baranoa - ATLÁNTICO", "Palmar De Varela - ATLÁNTICO", "Polonuevo - ATLÁNTICO", "Ponedera - ATLÁNTICO", "Sabanagrande - ATLÁNTICO", "Sabanalarga - ATLÁNTICO", "Santo Tomas - ATLÁNTICO", "Juan De Acosta - ATLÁNTICO", "Piojó - ATLÁNTICO", "Tubara - ATLÁNTICO", "Usiacuri - ATLÁNTICO",
+            "Bogotá D.C. - BOGOTÁ D.C.",
+            "Cicuco - BOLIVAR", "Hatillo De Loba - BOLIVAR", "Margarita - BOLIVAR", "Mompós - BOLIVAR", "San Fernando - BOLIVAR", "Talaigua Nuevo - BOLIVAR", "Arjona - BOLIVAR", "Arroyohondo - BOLIVAR", "Calamar - BOLIVAR", "Cartagena - BOLIVAR", "Clemencia - BOLIVAR", "Mahates - BOLIVAR", "San Cristobal - BOLIVAR", "San Estanislao - BOLIVAR", "Santa Catalina - BOLIVAR", "Santa Rosa De Lima - BOLIVAR", "Soplaviento - BOLIVAR", "Turbaco - BOLIVAR", "Turbana - BOLIVAR", "Villanueva - BOLIVAR", "Altos Del Rosario - BOLIVAR", "Barranco De Loba - BOLIVAR", "El Peñon - BOLIVAR", "Regidor - BOLIVAR", "Río Viejo - BOLIVAR", "San Martin De Loba - BOLIVAR", "Arenal - BOLIVAR", "Cantagallo - BOLIVAR", "Morales - BOLIVAR", "San Pablo - BOLIVAR", "Santa Rosa Del Sur - BOLIVAR", "Simití - BOLIVAR", "Achí - BOLIVAR", "Magangué - BOLIVAR", "Montecristo - BOLIVAR", "Pinillos - BOLIVAR", "San Jacinto Del Cauca - BOLIVAR", "Tiquisio - BOLIVAR", "Carmen De Bolívar - BOLIVAR", "Córdoba - BOLIVAR", "El Guamo - BOLIVAR", "María La Baja - BOLIVAR", "San Jacinto - BOLIVAR", "San Juan Nepomuceno - BOLIVAR", "Zambrano - BOLIVAR",
+            "Chíquiza - BOYACÁ", "Chivatá - BOYACÁ", "Cómbita - BOYACÁ", "Cucaita - BOYACÁ", "Motavita - BOYACÁ", "Oicatá - BOYACÁ", "Samacá - BOYACÁ", "Siachoque - BOYACÁ", "Sora - BOYACÁ", "Soracá - BOYACÁ", "Sotaquirá - BOYACÁ", "Toca - BOYACÁ", "Tunja - BOYACÁ", "Tuta - BOYACÁ", "Ventaquemada - BOYACÁ", "Chiscas - BOYACÁ", "Cubará - BOYACÁ", "El Cocuy - BOYACÁ", "El Espino - BOYACÁ", "Guacamayas - BOYACÁ", "Güicán - BOYACÁ", "Panqueba - BOYACÁ", "Labranzagrande - BOYACÁ", "Pajarito - BOYACÁ", "Paya - BOYACÁ", "Pisba - BOYACÁ", "Berbeo - BOYACÁ", "Campohermoso - BOYACÁ", "Miraflores - BOYACÁ", "Páez - BOYACÁ", "San Eduardo - BOYACÁ", "Zetaquira - BOYACÁ", "Boyacá - BOYACÁ", "Ciénega - BOYACÁ", "Jenesano - BOYACÁ", "Nuevo Colón - BOYACÁ", "Ramiriquí - BOYACÁ", "Rondón - BOYACÁ", "Tibaná - BOYACÁ", "Turmequé - BOYACÁ", "Umbita - BOYACÁ", "Viracachá - BOYACÁ", "Chinavita - BOYACÁ", "Garagoa - BOYACÁ", "Macanal - BOYACÁ", "Pachavita - BOYACÁ", "San Luis De Gaceno - BOYACÁ", "Santa María - BOYACÁ", "Boavita - BOYACÁ", "Covarachía - BOYACÁ", "La Uvita - BOYACÁ", "San Mateo - BOYACÁ", "Sativanorte - BOYACÁ", "Sativasur - BOYACÁ", "Soatá - BOYACÁ", "Susacón - BOYACÁ", "Tipacoque - BOYACÁ", "Briceño - BOYACÁ", "Buenavista - BOYACÁ", "Caldas - BOYACÁ", "Chiquinquirá - BOYACÁ", "Coper - BOYACÁ", "La Victoria - BOYACÁ", "Maripí - BOYACÁ", "Muzo - BOYACÁ", "Otanche - BOYACÁ", "Pauna - BOYACÁ", "Puerto Boyaca - BOYACÁ", "Quípama - BOYACÁ", "Saboyá - BOYACÁ", "San Miguel De Sema - BOYACÁ", "San Pablo Borbur - BOYACÁ", "Tununguá - BOYACÁ", "Almeida - BOYACÁ", "Chivor - BOYACÁ", "Guateque - BOYACÁ", "Guayatá - BOYACÁ", "La Capilla - BOYACÁ", "Somondoco - BOYACÁ", "Sutatenza - BOYACÁ", "Tenza - BOYACÁ", "Arcabuco - BOYACÁ", "Chitaraque - BOYACÁ", "Gachantivá - BOYACÁ", "Moniquirá - BOYACÁ", "Ráquira - BOYACÁ", "Sáchica - BOYACÁ", "San José De Pare - BOYACÁ", "Santa Sofía - BOYACÁ", "Santana - BOYACÁ", "Sutamarchán - BOYACÁ", "Tinjacá - BOYACÁ", "Togüí - BOYACÁ", "Villa De Leyva - BOYACÁ", "Aquitania - BOYACÁ", "Cuítiva - BOYACÁ", "Firavitoba - BOYACÁ", "Gameza - BOYACÁ", "Iza - BOYACÁ", "Mongua - BOYACÁ", "Monguí - BOYACÁ", "Nobsa - BOYACÁ", "Pesca - BOYACÁ", "Sogamoso - BOYACÁ", "Tibasosa - BOYACÁ", "Tópaga - BOYACÁ", "Tota - BOYACÁ", "Belén - BOYACÁ", "Busbanzá - BOYACÁ", "Cerinza - BOYACÁ", "Corrales - BOYACÁ", "Duitama - BOYACÁ", "Floresta - BOYACÁ", "Paipa - BOYACÁ", "San Rosa Viterbo - BOYACÁ", "Tutazá - BOYACÁ", "Betéitiva - BOYACÁ", "Chita - BOYACÁ", "Jericó - BOYACÁ", "Paz De Río - BOYACÁ", "Socha - BOYACÁ", "Socotá - BOYACÁ", "Tasco - BOYACÁ",
+            "Filadelfia - CALDAS", "La Merced - CALDAS", "Marmato - CALDAS", "Riosucio - CALDAS", "Supía - CALDAS", "Manzanares - CALDAS", "Marquetalia - CALDAS", "Marulanda - CALDAS", "Pensilvania - CALDAS", "Anserma - CALDAS", "Belalcázar - CALDAS", "Risaralda - CALDAS", "San José - CALDAS", "Viterbo - CALDAS", "Chinchina - CALDAS", "Manizales - CALDAS", "Neira - CALDAS", "Palestina - CALDAS", "Villamaria - CALDAS", "Aguadas - CALDAS", "Aranzazu - CALDAS", "Pácora - CALDAS", "Salamina - CALDAS", "La Dorada - CALDAS", "Norcasia - CALDAS", "Samaná - CALDAS", "Victoria - CALDAS",
+            "Albania - CAQUETA", "Belén De Los Andaquies - CAQUETA", "Cartagena Del Chairá - CAQUETA", "Currillo - CAQUETA", "El Doncello - CAQUETA", "El Paujil - CAQUETA", "Florencia - CAQUETA", "La Montañita - CAQUETA", "Milan - CAQUETA", "Morelia - CAQUETA", "Puerto Rico - CAQUETA", "San Jose Del Fragua - CAQUETA", "San Vicente Del Caguán - CAQUETA", "Solano - CAQUETA", "Solita - CAQUETA", "Valparaiso - CAQUETA",
+            "Aguazul - CASANARE", "Chameza - CASANARE", "Hato Corozal - CASANARE", "La Salina - CASANARE", "Maní - CASANARE", "Monterrey - CASANARE", "Nunchía - CASANARE", "Orocué - CASANARE", "Paz De Ariporo - CASANARE", "Pore - CASANARE", "Recetor - CASANARE", "Sabanalarga - CASANARE", "Sácama - CASANARE", "San Luis De Palenque - CASANARE", "Támara - CASANARE", "Tauramena - CASANARE", "Trinidad - CASANARE", "Villanueva - CASANARE", "Yopal - CASANARE",
+            "Cajibío - CAUCA", "El Tambo - CAUCA", "La Sierra - CAUCA", "Morales - CAUCA", "Piendamo - CAUCA", "Popayán - CAUCA", "Rosas - CAUCA", "Sotara - CAUCA", "Timbio - CAUCA", "Buenos Aires - CAUCA", "Caloto - CAUCA", "Corinto - CAUCA", "Miranda - CAUCA", "Padilla - CAUCA", "Puerto Tejada - CAUCA", "Santander De Quilichao - CAUCA", "Suarez - CAUCA", "Villa Rica - CAUCA", "Guapi - CAUCA", "Lopez - CAUCA", "Timbiqui - CAUCA", "Caldono - CAUCA", "Inzá - CAUCA", "Jambalo - CAUCA", "Paez - CAUCA", "Purace - CAUCA", "Silvia - CAUCA", "Toribio - CAUCA", "Totoro - CAUCA", "Almaguer - CAUCA", "Argelia - CAUCA", "Balboa - CAUCA", "Bolívar - CAUCA", "Florencia - CAUCA", "La Vega - CAUCA", "Mercaderes - CAUCA", "Patia - CAUCA", "Piamonte - CAUCA", "San Sebastian - CAUCA", "Santa Rosa - CAUCA", "Sucre - CAUCA",
+            "Becerril - CESAR", "Chimichagua - CESAR", "Chiriguana - CESAR", "Curumaní - CESAR", "La Jagua De Ibirico - CESAR", "Pailitas - CESAR", "Tamalameque - CESAR", "Astrea - CESAR", "Bosconia - CESAR", "El Copey - CESAR", "El Paso - CESAR", "Agustín Codazzi - CESAR", "La Paz - CESAR", "Manaure - CESAR", "Pueblo Bello - CESAR", "San Diego - CESAR", "Valledupar - CESAR", "Aguachica - CESAR", "Gamarra - CESAR", "González - CESAR", "La Gloria - CESAR", "Pelaya - CESAR", "Río De Oro - CESAR", "San Alberto - CESAR", "San Martín - CESAR",
+            "Atrato - CHOCO", "Bagadó - CHOCO", "Bojaya - CHOCO", "El Carmen De Atrato - CHOCO", "Lloró - CHOCO", "Medio Atrato - CHOCO", "Quibdó - CHOCO", "Rio Quito - CHOCO", "Acandí - CHOCO", "Belén De Bajira - CHOCO", "Carmén Del Darién - CHOCO", "Riosucio - CHOCO", "Unguía - CHOCO", "Bahía Solano - CHOCO", "Juradó - CHOCO", "Nuquí - CHOCO", "Alto Baudó - CHOCO", "Bajo Baudó - CHOCO", "El Litoral Del San Juan - CHOCO", "Medio Baudó - CHOCO", "Canton De San Pablo - CHOCO", "Certegui - CHOCO", "Condoto - CHOCO", "Itsmina - CHOCO", "Medio San Juan - CHOCO", "Nóvita - CHOCO", "Río Frío - CHOCO", "San José Del Palmar - CHOCO", "Sipí - CHOCO", "Tadó - CHOCO", "Union Panamericana - CHOCO",
+            "Tierralta - CORDOBA", "Valencia - CORDOBA", "Chimá - CORDOBA", "Cotorra - CORDOBA", "Lorica - CORDOBA", "Momil - CORDOBA", "Purísima - CORDOBA", "Montería - CORDOBA", "Canalete - CORDOBA", "Los Córdobas - CORDOBA", "Moñitos - CORDOBA", "Puerto Escondido - CORDOBA", "San Antero - CORDOBA", "San Bernardo Del Viento - CORDOBA", "Chinú - CORDOBA", "Sahagún - CORDOBA", "San Andrés Sotavento - CORDOBA", "Ayapel - CORDOBA", "Buenavista - CORDOBA", "La Apartada - CORDOBA", "Montelíbano - CORDOBA", "Planeta Rica - CORDOBA", "Pueblo Nuevo - CORDOBA", "Puerto Libertador - CORDOBA", "Cereté - CORDOBA", "Ciénaga De Oro - CORDOBA", "San Carlos - CORDOBA", "San Pelayo - CORDOBA",
+            "Chocontá - CUNDINAMARCA", "Macheta - CUNDINAMARCA", "Manta - CUNDINAMARCA", "Sesquilé - CUNDINAMARCA", "Suesca - CUNDINAMARCA", "Tibirita - CUNDINAMARCA", "Villapinzón - CUNDINAMARCA", "Agua De Dios - CUNDINAMARCA", "Girardot - CUNDINAMARCA", "Guataquí - CUNDINAMARCA", "Jerusalén - CUNDINAMARCA", "Nariño - CUNDINAMARCA", "Nilo - CUNDINAMARCA", "Ricaurte - CUNDINAMARCA", "Tocaima - CUNDINAMARCA", "Caparrapi - CUNDINAMARCA", "Guaduas - CUNDINAMARCA", "Puerto Salgar - CUNDINAMARCA", "Albán - CUNDINAMARCA", "La Peña - CUNDINAMARCA", "La Vega - CUNDINAMARCA", "Nimaima - CUNDINAMARCA", "Nocaima - CUNDINAMARCA", "Quebradanegra - CUNDINAMARCA", "San Francisco - CUNDINAMARCA", "Sasaima - CUNDINAMARCA", "Supatá - CUNDINAMARCA", "Útica - CUNDINAMARCA", "Vergara - CUNDINAMARCA", "Villeta - CUNDINAMARCA", "Gachala - CUNDINAMARCA", "Gacheta - CUNDINAMARCA", "Gama - CUNDINAMARCA", "Guasca - CUNDINAMARCA", "Guatavita - CUNDINAMARCA", "Junín - CUNDINAMARCA", "La Calera - CUNDINAMARCA", "Ubalá - CUNDINAMARCA", "Beltrán - CUNDINAMARCA", "Bituima - CUNDINAMARCA", "Chaguaní - CUNDINAMARCA", "Guayabal De Siquima - CUNDINAMARCA", "Puli - CUNDINAMARCA", "San Juan De Río Seco - CUNDINAMARCA", "Vianí - CUNDINAMARCA", "Medina - CUNDINAMARCA", "Paratebueno - CUNDINAMARCA", "Caqueza - CUNDINAMARCA", "Chipaque - CUNDINAMARCA", "Choachí - CUNDINAMARCA", "Fomeque - CUNDINAMARCA", "Fosca - CUNDINAMARCA", "Guayabetal - CUNDINAMARCA", "Gutiérrez - CUNDINAMARCA", "Quetame - CUNDINAMARCA", "Ubaque - CUNDINAMARCA", "Une - CUNDINAMARCA", "El Peñón - CUNDINAMARCA", "La Palma - CUNDINAMARCA", "Pacho - CUNDINAMARCA", "Paime - CUNDINAMARCA", "San Cayetano - CUNDINAMARCA", "Topaipi - CUNDINAMARCA", "Villagomez - CUNDINAMARCA", "Yacopí - CUNDINAMARCA", "Cajicá - CUNDINAMARCA", "Chía - CUNDINAMARCA", "Cogua - CUNDINAMARCA", "Gachancipá - CUNDINAMARCA", "Nemocon - CUNDINAMARCA", "Sopó - CUNDINAMARCA", "Tabio - CUNDINAMARCA", "Tocancipá - CUNDINAMARCA", "Zipaquirá - CUNDINAMARCA", "Bojacá - CUNDINAMARCA", "Cota - CUNDINAMARCA", "El Rosal - CUNDINAMARCA", "Facatativá - CUNDINAMARCA", "Funza - CUNDINAMARCA", "Madrid - CUNDINAMARCA", "Mosquera - CUNDINAMARCA", "Subachoque - CUNDINAMARCA", "Tenjo - CUNDINAMARCA", "Zipacon - CUNDINAMARCA", "Sibaté - CUNDINAMARCA", "Soacha - CUNDINAMARCA", "Arbeláez - CUNDINAMARCA", "Cabrera - CUNDINAMARCA", "Fusagasugá - CUNDINAMARCA", "Granada - CUNDINAMARCA", "Pandi - CUNDINAMARCA", "Pasca - CUNDINAMARCA", "San Bernardo - CUNDINAMARCA", "Silvania - CUNDINAMARCA", "Tibacuy - CUNDINAMARCA", "Venecia - CUNDINAMARCA", "Anapoima - CUNDINAMARCA", "Anolaima - CUNDINAMARCA", "Apulo - CUNDINAMARCA", "Cachipay - CUNDINAMARCA", "El Colegio - CUNDINAMARCA", "La Mesa - CUNDINAMARCA", "Quipile - CUNDINAMARCA", "San Antonio De Tequendama - CUNDINAMARCA", "Tena - CUNDINAMARCA", "Viotá - CUNDINAMARCA", "Carmen De Carupa - CUNDINAMARCA", "Cucunubá - CUNDINAMARCA", "Fúquene - CUNDINAMARCA", "Guachetá - CUNDINAMARCA", "Lenguazaque - CUNDINAMARCA", "Simijaca - CUNDINAMARCA", "Susa - CUNDINAMARCA", "Sutatausa - CUNDINAMARCA", "Tausa - CUNDINAMARCA", "Ubate - CUNDINAMARCA",
+            "Barranco Mina - GUAINIA", "Cacahual - GUAINIA", "Inírida - GUAINIA", "La Guadalupe - GUAINIA", "Mapiripan - GUAINIA", "Morichal - GUAINIA", "Pana Pana - GUAINIA", "Puerto Colombia - GUAINIA", "San Felipe - GUAINIA",
+            "Calamar - GUAVIARE", "El Retorno - GUAVIARE", "Miraflores - GUAVIARE", "San José Del Guaviare - GUAVIARE",
+            "Agrado - HUILA", "Altamira - HUILA", "Garzón - HUILA", "Gigante - HUILA", "Guadalupe - HUILA", "Pital - HUILA", "Suaza - HUILA", "Tarqui - HUILA", "Aipe - HUILA", "Algeciras - HUILA", "Baraya - HUILA", "Campoalegre - HUILA", "Colombia - HUILA", "Hobo - HUILA", "Iquira - HUILA", "Neiva - HUILA", "Palermo - HUILA", "Rivera - HUILA", "Santa María - HUILA", "Tello - HUILA", "Teruel - HUILA", "Villavieja - HUILA", "Yaguará - HUILA", "La Argentina - HUILA", "La Plata - HUILA", "Nátaga - HUILA", "Paicol - HUILA", "Tesalia - HUILA", "Acevedo - HUILA", "Elías - HUILA", "Isnos - HUILA", "Oporapa - HUILA", "Palestina - HUILA", "Pitalito - HUILA", "Saladoblanco - HUILA", "San Agustín - HUILA", "Timaná - HUILA",
+        "Albania - LA GUAJIRA", "Dibulla - LA GUAJIRA", "Maicao - LA GUAJIRA", "Manaure - LA GUAJIRA", "Riohacha - LA GUAJIRA", "Uribia - LA GUAJIRA", "Barrancas - LA GUAJIRA", "Distraccion - LA GUAJIRA", "El Molino - LA GUAJIRA", "Fonseca - LA GUAJIRA", "Hatonuevo - LA GUAJIRA", "La Jagua Del Pilar - LA GUAJIRA", "San Juan Del Cesar - LA GUAJIRA", "Urumita - LA GUAJIRA", "Villanueva - LA GUAJIRA",
+        "Ariguaní - MAGDALENA", "Chibolo - MAGDALENA", "Nueva Granada - MAGDALENA", "Plato - MAGDALENA", "Sabanas De San Angel - MAGDALENA", "Tenerife - MAGDALENA", "Algarrobo - MAGDALENA", "Aracataca - MAGDALENA", "Ciénaga - MAGDALENA", "El Reten - MAGDALENA", "Fundacion - MAGDALENA", "Pueblo Viejo - MAGDALENA", "Zona Bananera - MAGDALENA", "Cerro San Antonio - MAGDALENA", "Concordia - MAGDALENA", "El Piñon - MAGDALENA", "Pedraza - MAGDALENA", "Pivijay - MAGDALENA", "Remolino - MAGDALENA", "Salamina - MAGDALENA", "Sitionuevo - MAGDALENA", "Zapayan - MAGDALENA", "Santa Marta - MAGDALENA", "El Banco - MAGDALENA", "Guamal - MAGDALENA", "Pijiño Del Carmen - MAGDALENA", "San Sebastian De Buenavista - MAGDALENA", "San Zenon - MAGDALENA", "Santa Ana - MAGDALENA", "Santa Barbara De Pinto - MAGDALENA",
+        "El Castillo - META", "El Dorado - META", "Fuente De Oro - META", "Granada - META", "La Macarena - META", "La Uribe - META", "Lejanías - META", "Mapiripan - META", "Mesetas - META", "Puerto Concordia - META", "Puerto Lleras - META", "Puerto Rico - META", "San Juan De Arama - META", "Vista Hermosa - META", "Villavicencio - META", "Acacias - META", "Barranca De Upia - META", "Castilla La Nueva - META", "Cumaral - META", "El Calvario - META", "Guamal - META", "Restrepo - META", "San Carlos Guaroa - META", "San Juanito - META", "San Luis De Cubarral - META", "San Martín - META", "Cabuyaro - META", "Puerto Gaitán - META", "Puerto Lopez - META",
+        "Chachagui - NARIÑO", "Consaca - NARIÑO", "El Peñol - NARIÑO", "El Tambo - NARIÑO", "La Florida - NARIÑO", "Nariño - NARIÑO", "Pasto - NARIÑO", "Sandoná - NARIÑO", "Tangua - NARIÑO", "Yacuanquer - NARIÑO", "Ancuya - NARIÑO", "Guaitarilla - NARIÑO", "La Llanada - NARIÑO", "Linares - NARIÑO", "Los Andes - NARIÑO", "Mallama - NARIÑO", "Ospina - NARIÑO", "Providencia - NARIÑO", "Ricaurte - NARIÑO", "Samaniego - NARIÑO", "Santa Cruz - NARIÑO", "Sapuyes - NARIÑO", "Tuquerres - NARIÑO", "Barbacoas - NARIÑO", "El Charco - NARIÑO", "Francisco Pizarro - NARIÑO", "La Tola - NARIÑO", "Magui - NARIÑO", "Mosquera - NARIÑO", "Olaya Herrera - NARIÑO", "Roberto Payan - NARIÑO", "Santa Barbara - NARIÑO", "Tumaco - NARIÑO", "Alban - NARIÑO", "Arboleda - NARIÑO", "Belen - NARIÑO", "Buesaco - NARIÑO", "Colon - NARIÑO", "Cumbitara - NARIÑO", "El Rosario - NARIÑO", "El Tablon De Gomez - NARIÑO", "La Cruz - NARIÑO", "La Union - NARIÑO", "Leiva - NARIÑO", "Policarpa - NARIÑO", "San Bernardo - NARIÑO", "San Lorenzo - NARIÑO", "San Pablo - NARIÑO", "San Pedro De Cartago - NARIÑO", "Taminango - NARIÑO", "Aldana - NARIÑO", "Contadero - NARIÑO", "Córdoba - NARIÑO", "Cuaspud - NARIÑO", "Cumbal - NARIÑO", "Funes - NARIÑO", "Guachucal - NARIÑO", "Gualmatan - NARIÑO", "Iles - NARIÑO", "Imues - NARIÑO", "Ipiales - NARIÑO", "Potosí - NARIÑO", "Puerres - NARIÑO", "Pupiales - NARIÑO",
+        "Arboledas - NORTE DE SANTANDER", "Cucutilla - NORTE DE SANTANDER", "Gramalote - NORTE DE SANTANDER", "Lourdes - NORTE DE SANTANDER", "Salazar - NORTE DE SANTANDER", "Santiago - NORTE DE SANTANDER", "Villa Caro - NORTE DE SANTANDER", "Bucarasica - NORTE DE SANTANDER", "El Tarra - NORTE DE SANTANDER", "Sardinata - NORTE DE SANTANDER", "Tibú - NORTE DE SANTANDER", "Abrego - NORTE DE SANTANDER", "Cachirá - NORTE DE SANTANDER", "Convención - NORTE DE SANTANDER", "El Carmen - NORTE DE SANTANDER", "Hacarí - NORTE DE SANTANDER", "La Esperanza - NORTE DE SANTANDER", "La Playa - NORTE DE SANTANDER", "Ocaña - NORTE DE SANTANDER", "San Calixto - NORTE DE SANTANDER", "Teorama - NORTE DE SANTANDER", "Cúcuta - NORTE DE SANTANDER", "El Zulia - NORTE DE SANTANDER", "Los Patios - NORTE DE SANTANDER", "Puerto Santander - NORTE DE SANTANDER", "San Cayetano - NORTE DE SANTANDER", "Villa Del Rosario - NORTE DE SANTANDER", "Cácota - NORTE DE SANTANDER", "Chitagá - NORTE DE SANTANDER", "Mutiscua - NORTE DE SANTANDER", "Pamplona - NORTE DE SANTANDER", "Pamplonita - NORTE DE SANTANDER", "Silos - NORTE DE SANTANDER", "Bochalema - NORTE DE SANTANDER", "Chinácota - NORTE DE SANTANDER", "Durania - NORTE DE SANTANDER", "Herrán - NORTE DE SANTANDER", "Labateca - NORTE DE SANTANDER", "Ragonvalia - NORTE DE SANTANDER", "Toledo - NORTE DE SANTANDER",
+        "Colón - PUTUMAYO", "Mocoa - PUTUMAYO", "Orito - PUTUMAYO", "Puerto Asis - PUTUMAYO", "Puerto Caicedo - PUTUMAYO", "Puerto Guzman - PUTUMAYO", "Puerto Leguizamo - PUTUMAYO", "San Francisco - PUTUMAYO", "San Miguel - PUTUMAYO", "Santiago - PUTUMAYO", "Sibundoy - PUTUMAYO", "Valle Del Guamuez - PUTUMAYO", "Villa Garzon - PUTUMAYO",
+        "Armenia - QUINDIO", "Buenavista - QUINDIO", "Calarca - QUINDIO", "Cordoba - QUINDIO", "Genova - QUINDIO", "Pijao - QUINDIO", "Filandia - QUINDIO", "Salento - QUINDIO", "Circasia - QUINDIO", "La Tebaida - QUINDIO", "Montengro - QUINDIO", "Quimbaya - QUINDIO",
+        "Dosquebradas - RISARALDA", "La Virginia - RISARALDA", "Marsella - RISARALDA", "Pereira - RISARALDA", "Santa Rosa De Cabal - RISARALDA", "Apía - RISARALDA", "Balboa - RISARALDA", "Belén De Umbría - RISARALDA", "Guática - RISARALDA", "La Celia - RISARALDA", "Quinchia - RISARALDA", "Santuario - RISARALDA", "Mistrató - RISARALDA", "Pueblo Rico - RISARALDA",
+        "Chima - SANTANDER", "Confines - SANTANDER", "Contratación - SANTANDER", "El Guacamayo - SANTANDER", "Galán - SANTANDER", "Gambita - SANTANDER", "Guadalupe - SANTANDER", "Guapotá - SANTANDER", "Hato - SANTANDER", "Oiba - SANTANDER", "Palmar - SANTANDER", "Palmas Del Socorro - SANTANDER", "Santa Helena Del Opón - SANTANDER", "Simacota - SANTANDER", "Socorro - SANTANDER", "Suaita - SANTANDER", "Capitanejo - SANTANDER", "Carcasí - SANTANDER", "Cepitá - SANTANDER", "Cerrito - SANTANDER", "Concepción - SANTANDER", "Enciso - SANTANDER", "Guaca - SANTANDER", "Macaravita - SANTANDER", "Málaga - SANTANDER", "Molagavita - SANTANDER", "San Andrés - SANTANDER", "San José De Miranda - SANTANDER", "San Miguel - SANTANDER", "Aratoca - SANTANDER", "Barichara - SANTANDER", "Cabrera - SANTANDER", "Charalá - SANTANDER", "Coromoro - SANTANDER", "Curití - SANTANDER", "Encino - SANTANDER", "Jordán - SANTANDER", "Mogotes - SANTANDER", "Ocamonte - SANTANDER", "Onzaga - SANTANDER", "Páramo - SANTANDER", "Pinchote - SANTANDER", "San Gil - SANTANDER", "San Joaquín - SANTANDER", "Valle De San José - SANTANDER", "Villanueva - SANTANDER", "Barrancabermeja - SANTANDER", "Betulia - SANTANDER", "El Carmen De Chucurí - SANTANDER", "Puerto Wilches - SANTANDER", "Sabana De Torres - SANTANDER", "San Vicente De Chucurí - SANTANDER", "Zapatoca - SANTANDER", "Bucaramanga - SANTANDER", "California - SANTANDER", "Charta - SANTANDER", "El Playón - SANTANDER", "Floridablanca - SANTANDER", "Girón - SANTANDER", "Lebrija - SANTANDER", "Los Santos - SANTANDER", "Matanza - SANTANDER", "Piedecuesta - SANTANDER", "Rionegro - SANTANDER", "Santa Bárbara - SANTANDER", "Surata - SANTANDER", "Tona - SANTANDER", "Vetas - SANTANDER", "Aguada - SANTANDER", "Albania - SANTANDER", "Barbosa - SANTANDER", "Bolívar - SANTANDER", "Chipatá - SANTANDER", "Cimitarra - SANTANDER", "El Peñón - SANTANDER", "Florián - SANTANDER", "Guavatá - SANTANDER", "Guepsa - SANTANDER", "Jesús María - SANTANDER", "La Belleza - SANTANDER", "La Paz - SANTANDER", "Landázuri - SANTANDER", "Puente Nacional - SANTANDER", "Puerto Parra - SANTANDER", "San Benito - SANTANDER", "Sucre - SANTANDER", "Vélez - SANTANDER",
+        "Guaranda - SUCRE", "Majagual - SUCRE", "Sucre - SUCRE", "Chalán - SUCRE", "Coloso - SUCRE", "Morroa - SUCRE"
+        ];
+        // Función para normalizar texto (remover acentos)
+        function normalizeText(text) {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+        // Función para resaltar coincidencias
+        function highlightMatch(text, query) {
+            if (!query) return text;
+
+            // Escapar caracteres especiales correctamente
+            const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            // Crear regex con el texto escapado
+            const regex = new RegExp(`(${safeQuery})`, 'gi');
+
+            // Reemplazar coincidencias por <mark>
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        // Función genérica para crear autocompletado
+        function createAutocomplete(inputId, listId, hiddenInputId, dataArray, onSelectCallback) {
+        const input = document.getElementById(inputId);
+        const list = document.getElementById(listId);
+        const hiddenInput = document.getElementById(hiddenInputId);
+        let selectedIndex = -1;
+        // Función para filtrar y mostrar resultados
+        function showResults(query) {
+            if (query.length < 2) {
+                list.classList.remove('show');
+                return;
+            }
+
+            const normalizedQuery = normalizeText(query);
+            const results = dataArray.filter(item => 
+                normalizeText(item).includes(normalizedQuery)
+            ).slice(0, 5); // Máximo 5 resultados
+
+            if (results.length > 0) {
+                list.innerHTML = results.map(item => 
+                    `<div class="autocomplete-item" data-value="${item}">
+                        ${highlightMatch(item, query)}
+                    </div>`
+                ).join('');
+                list.classList.add('show');
+                selectedIndex = -1;
+            } else {
+                list.innerHTML = '<div class="autocomplete-no-results">No se encontraron resultados</div>';
+                list.classList.add('show');
+            }
+        }
+
+        // Event listener para input
+        input.addEventListener('input', function() {
+            const query = this.value.trim();
+            showResults(query);
+            hiddenInput.value = ''; // Limpiar valor oculto mientras escribe
+        });
+
+        // Event listener para hacer clic en un resultado
+        list.addEventListener('click', function(e) {
+            const item = e.target.closest('.autocomplete-item');
+            if (item) {
+                const value = item.getAttribute('data-value');
+                input.value = value;
+                hiddenInput.value = value;
+                list.classList.remove('show');
+                
+                // Limpiar error si existía
+                const errorMsg = input.closest('.form-group').querySelector('.error-message');
+                if (errorMsg) errorMsg.classList.remove('show');
+                input.classList.remove('error');
+
+                // Ejecutar callback si existe
+                if (onSelectCallback) onSelectCallback(value);
+            }
+        });
+
+        // Navegación con teclado
+        input.addEventListener('keydown', function(e) {
+            const items = list.querySelectorAll('.autocomplete-item');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                updateSelection(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, -1);
+                updateSelection(items);
+            } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                e.preventDefault();
+                items[selectedIndex].click();
+            } else if (e.key === 'Escape') {
+                list.classList.remove('show');
+            }
+        });
+
+        // Función para actualizar selección visual
+        function updateSelection(items) {
+            items.forEach((item, index) => {
+                if (index === selectedIndex) {
+                    item.classList.add('active');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Validación personalizada
+        input.addEventListener('blur', function() {
+            const value = this.value.trim();
+            const errorMsg = this.closest('.form-group').querySelector('.error-message');
+            
+            if (value && !dataArray.includes(value)) {
+                this.classList.add('error');
+                if (errorMsg) {
+                    errorMsg.textContent = 'Por favor selecciona una opción válida de la lista';
+                    errorMsg.classList.add('show');
+                }
+                hiddenInput.value = '';
+            } else if (value && dataArray.includes(value)) {
+                hiddenInput.value = value;
+                this.classList.remove('error');
+                if (errorMsg) errorMsg.classList.remove('show');
+            }
+        });
+        }
+        // Inicializar autocompletado para lugar de nacimiento
+        createAutocomplete(
+        'lugarNacimiento',
+        'lugarNacimientoList',
+        'lugarNacimientoValue',
+        lugaresNacimiento,
+        null
+        );
+        // Inicializar autocompletado para ciudad de residencia
+        createAutocomplete(
+        'ciudadResidencia',
+        'ciudadResidenciaList',
+        'ciudadResidenciaValue',
+        lugaresNacimiento,
+        function(selectedValue) {
+        // Callback: Mostrar localidad solo si es Bogotá
+        const localidadGroup = document.getElementById('localidadGroup');
+        const localidadSelect = document.getElementById('localidad');
+            if (selectedValue === 'Bogotá D.C. - BOGOTÁ D.C.') {
+                localidadGroup.classList.add('show');
+                localidadSelect.setAttribute('required', 'required');
+            } else {
+                localidadGroup.classList.remove('show');
+                localidadSelect.removeAttribute('required');
+                localidadSelect.value = '';
+            }
+        }
+        );
+        // Cerrar listas al hacer clic fuera
+        document.addEventListener('click', function(e) {
+        const lugarNacimientoInput = document.getElementById('lugarNacimiento');
+        const lugarNacimientoList = document.getElementById('lugarNacimientoList');
+        const ciudadResidenciaInput = document.getElementById('ciudadResidencia');
+        const ciudadResidenciaList = document.getElementById('ciudadResidenciaList');
+        if (!lugarNacimientoInput.contains(e.target) && !lugarNacimientoList.contains(e.target)) {
+            lugarNacimientoList.classList.remove('show');
+        }
+
+        if (!ciudadResidenciaInput.contains(e.target) && !ciudadResidenciaList.contains(e.target)) {
+            ciudadResidenciaList.classList.remove('show');
+        }
+        });
+
+
+
+        // Mostrar programa de interés cuando se selecciona tipo de suscripción
+        const tipoSuscripcion = document.getElementById('tipoSuscripcion');
+        const programaGroup = document.querySelector('.programa-group');
+
+        tipoSuscripcion.addEventListener('change', function() {
+            if (this.value !== '') {
+                programaGroup.classList.add('show');
+            } else {
+                programaGroup.classList.remove('show');
+            }
+        });
+
+        // Mostrar campo de cesantías si método de pago es "Pago con cesantías"
+        const metodoPago = document.getElementById('metodoPago');
+        const cesantiasGroup = document.getElementById('cesantiasGroup');
+        const valorCesantias = document.getElementById('valorCesantias');
+
+        metodoPago.addEventListener('change', function() {
+            if (this.value === 'Pago con cesantías') {
+                cesantiasGroup.classList.add('show');
+                valorCesantias.setAttribute('required', 'required');
+            } else {
+                cesantiasGroup.classList.remove('show');
+                valorCesantias.removeAttribute('required');
+                valorCesantias.value = '';
+            }
+        });
+
+        // Mostrar campo de obsequio si forma de pago es "Otorgado por"
+        const formaPagoInscripcion = document.getElementById('formaPagoInscripcion');
+        const obsequioGroup = document.getElementById('obsequioGroup');
+        const obsequioAutorizado = document.getElementById('obsequioAutorizado');
+
+        formaPagoInscripcion.addEventListener('change', function() {
+            if (this.value === 'Otorgado por') {
+                obsequioGroup.classList.add('show');
+                obsequioAutorizado.setAttribute('required', 'required');
+            } else {
+                obsequioGroup.classList.remove('show');
+                obsequioAutorizado.removeAttribute('required');
+                obsequioAutorizado.value = '';
+            }
+        });
+
+        // ============================================================
+        // 4. MANEJO DE ARCHIVO (COMPROBANTE)
+        // ============================================================
+        const fileInput = document.getElementById('comprobanteFile');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileSelected = document.getElementById('fileSelected');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const removeFileBtn = document.getElementById('removeFile');
+
+        // Abrir selector de archivos al hacer clic en el área
+        fileUploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // Manejar selección de archivo
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                const maxSize = 3 * 1024 * 1024; // 3 MB
+
+                // Validar tamaño
+                if (file.size > maxSize) {
+                    alert('El archivo supera el tamaño máximo de 3MB');
+                    this.value = '';
+                    return;
+                }
+
+                // Mostrar información del archivo
+                fileName.textContent = file.name;
+                fileSize.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+                fileUploadArea.style.display = 'none';
+                fileSelected.style.display = 'flex';
+
+                // Limpiar error si existía
+                const errorMsg = this.parentElement.querySelector('.error-message');
+                if (errorMsg) errorMsg.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        // Eliminar archivo seleccionado
+        removeFileBtn.addEventListener('click', function() {
+            fileInput.value = '';
+            fileUploadArea.style.display = 'block';
+            fileSelected.style.display = 'none';
+        });
+
+        // ============================================================
+        // 5. VALIDACIÓN Y ENVÍO DEL FORMULARIO
+        // ============================================================
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let isFormValid = true;
+            const errors = [];
+
+            // Validar todos los campos visibles y requeridos
+            allInputs.forEach(input => {
+                // Solo validar si el campo está visible y es requerido
+                const isVisible = input.offsetParent !== null;
+                if (isVisible && input.hasAttribute('required')) {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                        errors.push(input);
+                    }
+                }
+            });
+
+            // Validar archivo
+            if (!fileInput.files || fileInput.files.length === 0) {
+                isFormValid = false;
+                const errorMsg = fileInput.parentElement.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.classList.add('show');
+                }
+                errors.push(fileInput);
+            }
+
+            // Si hay errores, hacer scroll al primero
+            if (!isFormValid) {
+                alert('Por favor completa todos los campos obligatorios correctamente');
+                if (errors.length > 0) {
+                    errors[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    errors[0].focus();
+                }
+                return false;
+            }
+
+            // Si todo es válido, mostrar mensaje de éxito
+            alert('¡Formulario enviado correctamente!');
+            // Aquí puedes agregar la lógica para enviar los datos al servidor
+            // form.submit();
+        });
+
+        // ============================================================
+        // LÓGICA DE TIPO DE INGRESO (AMERICANA VS FUNDETEC)
+        // ============================================================
+
+        const tipoIngresoSelect = document.getElementById('tipoIngreso');
+        const tipoSuscripcionGroup = document.querySelector('.tipo-suscripcion-group');
+        const tipoSuscripcionSelect = document.getElementById('tipoSuscripcion');
+        const seccionPeriodo = document.querySelector('.seccion-periodo');
+        const seccionTitulacion = document.querySelector('.seccion-titulacion');
+        const contenidoAmericana = document.getElementById('contenidoAmericana');
+        const contenidoFundetec = document.getElementById('contenidoFundetec');
+        const tituloObtenidoSelect = document.getElementById('tituloObtenido');
+        const programaInteresSelect = document.getElementById('programaInteres');
+
+        // Programas por institución y título
+        const programasAmericana = {
+            'Homologación': {
+                'Semestres cursados': [
+                    'Americana - Profesional - Administración Turistica Y Hotelera - Presencial / Remoto',
+                    'Americana - Profesional - Administración de Empresas - Presencial / Remoto',
+                    'Americana - Profesional - Administración Pública - Virtual',
+                    'Americana - Profesional - Comunicaciones y Marketing - Virtual',
+                    'Americana - Profesional - Contaduría Pública - Presencial / Remoto',
+                    'Americana - Profesional - Derecho - Presencial / Remoto',
+                    'Americana - Profesional - Ingeniería de Sistemas - Presencial / Remoto',
+                    'Americana - Profesional - Ingenieria Industrial - Presencial / Remoto',
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto',
+                    'Americana - Profesional - Negocios Internacionales - Presencial / Remoto',
+                    'Americana - Profesional - Psicología - Presencial / Remoto'
+                ],
+                'Técnico Laboral': [
+                    'Americana - Profesional - Administración Turistica Y Hotelera - Presencial / Remoto',
+                    'Americana - Profesional - Administración de Empresas - Presencial / Remoto',
+                    'Americana - Profesional - Administración Pública - Virtual',
+                    'Americana - Profesional - Comunicaciones y Marketing - Virtual',
+                    'Americana - Profesional - Contaduría Pública - Presencial / Remoto',
+                    'Americana - Profesional - Derecho - Presencial / Remoto',
+                    'Americana - Profesional - Ingeniería de Sistemas - Presencial / Remoto',
+                    'Americana - Profesional - Ingenieria Industrial - Presencial / Remoto',
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto',
+                    'Americana - Profesional - Negocios Internacionales - Presencial / Remoto',
+                    'Americana - Profesional - Psicología - Presencial / Remoto'
+                ],
+                'Normalista': [
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto'
+                ],
+                'Técnico Profesional': [
+                    'Americana - Profesional - Administración Turistica Y Hotelera - Presencial / Remoto',
+                    'Americana - Profesional - Administración de Empresas - Presencial / Remoto',
+                    'Americana - Profesional - Administración Pública - Virtual',
+                    'Americana - Profesional - Comunicaciones y Marketing - Virtual',
+                    'Americana - Profesional - Contaduría Pública - Presencial / Remoto',
+                    'Americana - Profesional - Derecho - Presencial / Remoto',
+                    'Americana - Profesional - Ingeniería de Sistemas - Presencial / Remoto',
+                    'Americana - Profesional - Ingenieria Industrial - Presencial / Remoto',
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto',
+                    'Americana - Profesional - Negocios Internacionales - Presencial / Remoto',
+                    'Americana - Profesional - Psicología - Presencial / Remoto'
+                ],
+                'Tecnología': [
+                    'Americana - Profesional - Administración Turistica Y Hotelera - Presencial / Remoto',
+                    'Americana - Profesional - Administración de Empresas - Presencial / Remoto',
+                    'Americana - Profesional - Administración Pública - Virtual',
+                    'Americana - Profesional - Comunicaciones y Marketing - Virtual',
+                    'Americana - Profesional - Contaduría Pública - Presencial / Remoto',
+                    'Americana - Profesional - Derecho - Presencial / Remoto',
+                    'Americana - Profesional - Ingeniería de Sistemas - Presencial / Remoto',
+                    'Americana - Profesional - Ingenieria Industrial - Presencial / Remoto',
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto',
+                    'Americana - Profesional - Negocios Internacionales - Presencial / Remoto',
+                    'Americana - Profesional - Psicología - Presencial / Remoto'
+                ],
+                'Universitario': [
+                    'Americana - Especialización - Derecho Administrativo - Presencial / Remoto',
+                    'Americana - Especialización - Derecho Penal - Presencial / Remoto',
+                    'Americana - Especialización - Gerencia de Proyectos - Virtual',
+                    'Americana - Maestría - Maestria en Administración (MBA) - Presencial / Remoto',
+                    'Americana - Maestría - Maestria en Administración (MBA) - Virtual'
+                ]
+            },
+            'Primer semestre': {
+                'default': [
+                    'Americana - Profesional - Administración Turistica Y Hotelera - Presencial / Remoto',
+                    'Americana - Profesional - Administración de Empresas - Presencial / Remoto',
+                    'Americana - Profesional - Administración Pública - Virtual',
+                    'Americana - Profesional - Comunicaciones y Marketing - Virtual',
+                    'Americana - Profesional - Contaduría Pública - Presencial / Remoto',
+                    'Americana - Profesional - Derecho - Presencial / Remoto',
+                    'Americana - Profesional - Ingeniería de Sistemas - Presencial / Remoto',
+                    'Americana - Profesional - Ingenieria Industrial - Presencial / Remoto',
+                    'Americana - Profesional - Licenciatura en Educación Infantil - Presencial / Remoto',
+                    'Americana - Profesional - Negocios Internacionales - Presencial / Remoto',
+                    'Americana - Profesional - Psicología - Presencial / Remoto'
+                ]
+            }
+        };
+
+        const programasFundetec = {
+            'Grado 9°': [
+                'Fundetec - Técnico Laboral - Administración Pública - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar Administrativo - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar Contable - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar de Recursos Humanos - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar de Seguridad y Salud en el Trabajo - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar en Criminalistica - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Desarrollo de Software - Presencial asistido por las TIC - Barranquilla'
+            ],
+            'Grado 11°': [
+                'Fundetec - Técnico Laboral - Administración Pública - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar Administrativo - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar Contable - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar de Recursos Humanos - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar de Seguridad y Salud en el Trabajo - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Auxiliar en Criminalistica - Presencial asistido por las TIC - Barranquilla',
+                'Fundetec - Técnico Laboral - Desarrollo de Software - Presencial asistido por las TIC - Barranquilla'
+            ]
+        };
+
+        // Manejar cambio de tipo de ingreso
+        tipoIngresoSelect.addEventListener('change', function() {
+            const tipoIngreso = this.value;
+            const programaGroupElement = document.querySelector('.programa-group');
+            
+            // Resetear todo
+            tipoSuscripcionGroup.style.display = 'none';
+            tipoSuscripcionSelect.removeAttribute('required');
+            tipoSuscripcionSelect.value = '';
+            seccionPeriodo.style.display = 'none';
+            seccionTitulacion.style.display = 'none';
+            contenidoAmericana.style.display = 'none';
+            contenidoFundetec.style.display = 'none';
+            programaGroupElement.style.display = 'none';
+            programaGroupElement.classList.remove('show');
+            
+            // Limpiar selects
+            tituloObtenidoSelect.innerHTML = '<option value="">Selecciona el último título aprobado</option>';
+            tituloObtenidoSelect.removeAttribute('required');
+            programaInteresSelect.innerHTML = '<option value="">Selecciona tu programa de interés</option>';
+            programaInteresSelect.removeAttribute('required');
+            
+            // Limpiar campos de período
+            document.getElementById('periodoAmericana').value = '';
+            document.getElementById('periodoAmericana').removeAttribute('required');
+            document.getElementById('tiempoEstudioAmericana').value = '';
+            document.getElementById('tiempoEstudioAmericana').removeAttribute('required');
+            document.getElementById('metodologiaAmericana').value = '';
+            document.getElementById('metodologiaAmericana').removeAttribute('required');
+            
+            document.getElementById('periodoFundetec').value = '';
+            document.getElementById('periodoFundetec').removeAttribute('required');
+            document.getElementById('tiempoEstudioFundetec').value = '';
+            document.getElementById('tiempoEstudioFundetec').removeAttribute('required');
+            document.getElementById('metodologiaFundetec').value = '';
+            document.getElementById('metodologiaFundetec').removeAttribute('required');
+            
+            document.getElementById('metodoPago').value = '';
+            document.getElementById('metodoPago').removeAttribute('required');
+            
+            if (tipoIngreso === 'americana') {
+                tipoSuscripcionGroup.style.display = 'block';
+                tipoSuscripcionSelect.setAttribute('required', 'required');
+            } else if (tipoIngreso === 'fundetec') {
+                // Mostrar directamente sección 4 y 5 para Fundetec
+                seccionPeriodo.style.display = 'block';
+                seccionTitulacion.style.display = 'block';
+                contenidoFundetec.style.display = 'block';
+                
+                // Hacer campos requeridos para Fundetec
+                document.getElementById('periodoFundetec').setAttribute('required', 'required');
+                document.getElementById('tiempoEstudioFundetec').setAttribute('required', 'required');
+                document.getElementById('metodologiaFundetec').setAttribute('required', 'required');
+                tituloObtenidoSelect.setAttribute('required', 'required');
+                
+                // Cargar opciones de título para Fundetec
+                const opcionesFundetec = ['Grado 9°', 'Grado 11°'];
+                opcionesFundetec.forEach(opcion => {
+                    const opt = document.createElement('option');
+                    opt.value = opcion;
+                    opt.textContent = opcion;
+                    tituloObtenidoSelect.appendChild(opt);
+                });
+            }
+        });
+
+        // Manejar cambio de tipo de suscripción (solo para Americana)
+        tipoSuscripcionSelect.addEventListener('change', function() {
+            const tipoSuscripcion = this.value;
+            const programaGroupElement = document.querySelector('.programa-group');
+            
+            // Resetear sección 6
+            programaGroupElement.style.display = 'none';
+            programaGroupElement.classList.remove('show');
+            programaInteresSelect.innerHTML = '<option value="">Selecciona tu programa de interés</option>';
+            programaInteresSelect.removeAttribute('required');
+            document.getElementById('metodoPago').value = '';
+            document.getElementById('metodoPago').removeAttribute('required');
+            
+            // Limpiar título obtenido
+            tituloObtenidoSelect.innerHTML = '<option value="">Selecciona el último título aprobado</option>';
+            tituloObtenidoSelect.value = '';
+            
+            if (tipoSuscripcion) {
+                seccionPeriodo.style.display = 'block';
+                seccionTitulacion.style.display = 'block';
+                contenidoAmericana.style.display = 'block';
+                
+                // Hacer campos requeridos para Americana
+                document.getElementById('periodoAmericana').setAttribute('required', 'required');
+                document.getElementById('tiempoEstudioAmericana').setAttribute('required', 'required');
+                document.getElementById('metodologiaAmericana').setAttribute('required', 'required');
+                tituloObtenidoSelect.setAttribute('required', 'required');
+                
+                // Cargar opciones de título según tipo de suscripción
+                if (tipoSuscripcion === 'Homologación') {
+                    const opcionesHomologacion = ['Semestres cursados', 'Técnico Laboral', 'Normalista', 'Técnico Profesional', 'Tecnología', 'Universitario'];
+                    opcionesHomologacion.forEach(opcion => {
+                        const opt = document.createElement('option');
+                        opt.value = opcion;
+                        opt.textContent = opcion;
+                        tituloObtenidoSelect.appendChild(opt);
+                    });
+                } else if (tipoSuscripcion === 'Primer semestre') {
+                    // Agregar opción para primer semestre
+                    const opt = document.createElement('option');
+                    opt.value = 'Grado 11° o equivalente';
+                    opt.textContent = 'Grado 11° o equivalente';
+                    tituloObtenidoSelect.appendChild(opt);
+                }
+            }
+        });
+
+        // Manejar cambio de título obtenido
+        tituloObtenidoSelect.addEventListener('change', function() {
+            const titulo = this.value;
+            const tipoIngreso = tipoIngresoSelect.value;
+            const tipoSuscripcion = tipoSuscripcionSelect.value;
+            
+            programaInteresSelect.innerHTML = '<option value="">Selecciona tu programa de interés</option>';
+            const programaGroupElement = document.querySelector('.programa-group');
+            
+            // Ocultar sección 6 por defecto
+            programaGroupElement.style.display = 'none';
+            programaGroupElement.classList.remove('show');
+            programaInteresSelect.removeAttribute('required');
+            document.getElementById('metodoPago').removeAttribute('required');
+            
+            if (!titulo) return; // Si no hay título seleccionado, no continuar
+            
+            if (tipoIngreso === 'americana') {
+                let programas = [];
+                
+                if (tipoSuscripcion === 'Homologación' && programasAmericana.Homologación[titulo]) {
+                    programas = programasAmericana.Homologación[titulo];
+                } else if (tipoSuscripcion === 'Primer semestre' && titulo === 'Grado 11° o equivalente') {
+                    programas = programasAmericana['Primer semestre'].default;
+                }
+                
+                if (programas.length > 0) {
+                    programas.forEach(programa => {
+                        const opt = document.createElement('option');
+                        opt.value = programa;
+                        opt.textContent = programa.split(' - ').slice(2).join(' - ');
+                        programaInteresSelect.appendChild(opt);
+                    });
+                    
+                    // Mostrar sección 6
+                    programaGroupElement.style.display = 'block';
+                    programaGroupElement.classList.add('show');
+                    programaInteresSelect.setAttribute('required', 'required');
+                    document.getElementById('metodoPago').setAttribute('required', 'required');
+                }
+            } else if (tipoIngreso === 'fundetec' && programasFundetec[titulo]) {
+                const programas = programasFundetec[titulo];
+                
+                programas.forEach(programa => {
+                    const opt = document.createElement('option');
+                    opt.value = programa;
+                    opt.textContent = programa.split(' - ').slice(2).join(' - ');
+                    programaInteresSelect.appendChild(opt);
+                });
+                
+                // Mostrar sección 6
+                programaGroupElement.style.display = 'block';
+                programaGroupElement.classList.add('show');
+                programaInteresSelect.setAttribute('required', 'required');
+                document.getElementById('metodoPago').setAttribute('required', 'required');
+            }
+        });
+
+    </script>
+</body>
+</html>
+
