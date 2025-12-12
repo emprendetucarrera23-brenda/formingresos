@@ -649,6 +649,340 @@
             display: none;
         }
 
+        /* ============================================ */
+        /* MODAL DE CONFIRMACIÓN */
+        /* ============================================ */
+
+        /* Overlay del modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Contenedor principal del modal */
+        .modal-container {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px rgba(55, 12, 49, 0.3);
+            border: 2px solid rgba(55, 12, 49, 0.1);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Header del modal */
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 2px solid #f3f4f6;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        .modal-header-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .modal-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(55, 12, 49, 0.3);
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #370c31;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .modal-subtitle {
+            font-size: 0.9375rem;
+            color: #6b7280;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .modal-close {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #fee2e2;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: #fecaca;
+            transform: scale(1.1);
+        }
+
+        /* Body del modal con scroll */
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5d1a51 0%, #7d2471 100%);
+        }
+
+        /* Secciones dentro del modal */
+        .modal-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+            border: 2px solid rgba(55, 12, 49, 0.1);
+            border-radius: 1rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(55, 12, 49, 0.1);
+        }
+
+        .modal-section-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(55, 12, 49, 0.3);
+        }
+
+        .modal-section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #370c31;
+            margin: 0;
+        }
+
+        /* Grid de campos */
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .modal-field-full {
+            grid-column: 1 / -1;
+        }
+
+        .modal-field-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .modal-field-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #370c31;
+            padding: 0.75rem 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            border: 2px solid rgba(55, 12, 49, 0.1);
+            word-break: break-word;
+        }
+
+        .modal-observaciones {
+            min-height: 3rem;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        /* Footer del modal */
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 2px solid #f3f4f6;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            background: #fafafa;
+            border-radius: 0 0 1.5rem 1.5rem;
+        }
+
+        .modal-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .modal-button-secondary {
+            background: white;
+            color: #370c31;
+            border: 2px solid #370c31;
+        }
+
+        .modal-button-secondary:hover {
+            background: #f3f4f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(55, 12, 49, 0.2);
+        }
+
+        .modal-button-primary {
+            background: linear-gradient(135deg, #370c31 0%, #5d1a51 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(55, 12, 49, 0.4);
+        }
+
+        .modal-button-primary:hover {
+            background: linear-gradient(135deg, #4d1145 0%, #7d2471 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(55, 12, 49, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .modal-container {
+                max-height: 95vh;
+                margin: 0.5rem;
+            }
+
+            .modal-header {
+                padding: 1.5rem;
+            }
+
+            .modal-header-content {
+                gap: 1rem;
+            }
+
+            .modal-icon {
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-subtitle {
+                font-size: 0.875rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-section {
+                padding: 1.25rem;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                padding: 1.25rem 1.5rem;
+            }
+
+            .modal-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1470,6 +1804,262 @@
         </div>
     </div>
 
+    <!-- ============================================ -->
+    <!-- MODAL DE CONFIRMACION - INSERTAR ANTES DE </body> -->
+    <!-- ============================================ -->
+
+    <div id="confirmacionModal" class="modal-overlay">
+        <div class="modal-container">
+            <!-- Header del Modal -->
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <div class="modal-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="modal-title">Confirma tu Información</h2>
+                        <p class="modal-subtitle">Revisa que todos los datos sean correctos antes de enviar</p>
+                    </div>
+                </div>
+                <button type="button" class="modal-close" id="cerrarModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body del Modal con Scroll -->
+            <div class="modal-body">
+                <!-- Sección 1: Datos de Suscripción -->
+                <div class="modal-section">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">1</div>
+                        <h3 class="modal-section-title">Datos para Suscripción</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Tipo de ingreso:</span>
+                            <span class="modal-field-value" id="confirm-tipoIngreso"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Código de orientador:</span>
+                            <span class="modal-field-value" id="confirm-codigoOrientador"></span>
+                        </div>
+                        <div class="modal-field" id="confirm-tipoSuscripcion-container" style="display: none;">
+                            <span class="modal-field-label">Tipo de suscripción:</span>
+                            <span class="modal-field-value" id="confirm-tipoSuscripcion"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 2: Información del Suscriptor -->
+                <div class="modal-section">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">2</div>
+                        <h3 class="modal-section-title">Información de Suscriptor</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Nombres:</span>
+                            <span class="modal-field-value" id="confirm-nombres"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Apellidos:</span>
+                            <span class="modal-field-value" id="confirm-apellidos"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Tipo de documento:</span>
+                            <span class="modal-field-value" id="confirm-tipoDocumento"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Número de identificación:</span>
+                            <span class="modal-field-value" id="confirm-numeroIdentificacion"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Lugar de nacimiento:</span>
+                            <span class="modal-field-value" id="confirm-lugarNacimiento"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Fecha de nacimiento:</span>
+                            <span class="modal-field-value" id="confirm-fechaNacimiento"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 3: Datos Demográficos -->
+                <div class="modal-section">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">3</div>
+                        <h3 class="modal-section-title">Datos Demográficos</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Ciudad de residencia:</span>
+                            <span class="modal-field-value" id="confirm-ciudadResidencia"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Dirección:</span>
+                            <span class="modal-field-value" id="confirm-direccion"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Barrio:</span>
+                            <span class="modal-field-value" id="confirm-barrio"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Estrato:</span>
+                            <span class="modal-field-value" id="confirm-estrato"></span>
+                        </div>
+                        <div class="modal-field" id="confirm-localidad-container" style="display: none;">
+                            <span class="modal-field-label">Localidad:</span>
+                            <span class="modal-field-value" id="confirm-localidad"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Teléfono celular:</span>
+                            <span class="modal-field-value" id="confirm-telefonoCelular"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Correo electrónico:</span>
+                            <span class="modal-field-value" id="confirm-correoElectronico"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Tipo de sangre:</span>
+                            <span class="modal-field-value" id="confirm-tipoSangre"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Víctima de conflicto:</span>
+                            <span class="modal-field-value" id="confirm-victimaConflicto"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Estado civil:</span>
+                            <span class="modal-field-value" id="confirm-estadoCivil"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 4: Periodo -->
+                <div class="modal-section" id="confirm-seccion-periodo" style="display: none;">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">4</div>
+                        <h3 class="modal-section-title">Periodo</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Periodo:</span>
+                            <span class="modal-field-value" id="confirm-periodo"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Tiempo de estudio:</span>
+                            <span class="modal-field-value" id="confirm-tiempoEstudio"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Modalidad:</span>
+                            <span class="modal-field-value" id="confirm-metodologia"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 5: Última Titulación -->
+                <div class="modal-section" id="confirm-seccion-titulacion" style="display: none;">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">5</div>
+                        <h3 class="modal-section-title">Última Titulación Obtenida</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Nivel de último título:</span>
+                            <span class="modal-field-value" id="confirm-tituloObtenido"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 6: Programa de Interés -->
+                <div class="modal-section" id="confirm-seccion-programa" style="display: none;">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">6</div>
+                        <h3 class="modal-section-title">Información de Programa de Interés</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Programa de interés:</span>
+                            <span class="modal-field-value" id="confirm-programaInteres"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Método de pago:</span>
+                            <span class="modal-field-value" id="confirm-metodoPago"></span>
+                        </div>
+                        <div class="modal-field" id="confirm-valorCesantias-container" style="display: none;">
+                            <span class="modal-field-label">Valor cesantías:</span>
+                            <span class="modal-field-value" id="confirm-valorCesantias"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 7: Información de Inscripción -->
+                <div class="modal-section">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">7</div>
+                        <h3 class="modal-section-title">Información de Inscripción</h3>
+                    </div>
+                    <div class="modal-grid">
+                        <div class="modal-field">
+                            <span class="modal-field-label">Fecha de inscripción:</span>
+                            <span class="modal-field-value" id="confirm-fechaPago"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Forma de pago:</span>
+                            <span class="modal-field-value" id="confirm-formaPagoInscripcion"></span>
+                        </div>
+                        <div class="modal-field">
+                            <span class="modal-field-label">Valor inscripción:</span>
+                            <span class="modal-field-value" id="confirm-valorInscripcion"></span>
+                        </div>
+                        <div class="modal-field" id="confirm-obsequio-container" style="display: none;">
+                            <span class="modal-field-label">Obsequio autorizado por:</span>
+                            <span class="modal-field-value" id="confirm-obsequioAutorizado"></span>
+                        </div>
+                        <div class="modal-field modal-field-full">
+                            <span class="modal-field-label">Comprobante:</span>
+                            <span class="modal-field-value" id="confirm-comprobante"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 8: Observaciones -->
+                <div class="modal-section" id="confirm-seccion-observaciones" style="display: none;">
+                    <div class="modal-section-header">
+                        <div class="modal-section-number">8</div>
+                        <h3 class="modal-section-title">Observaciones</h3>
+                    </div>
+                    <div class="modal-field modal-field-full">
+                        <span class="modal-field-label">Observaciones adicionales:</span>
+                        <p class="modal-field-value modal-observaciones" id="confirm-observaciones"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer del Modal -->
+            <div class="modal-footer">
+                <button type="button" class="modal-button modal-button-secondary" id="editarFormulario">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Editar / Volver
+                </button>
+                <button type="button" class="modal-button modal-button-primary" id="confirmarEnvio">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Confirmar y Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================================
         // VALIDACIONES Y LÓGICA DEL FORMULARIO
@@ -1870,52 +2460,7 @@
             fileSelected.style.display = 'none';
         });
 
-        // ============================================================
-        // 5. VALIDACIÓN Y ENVÍO DEL FORMULARIO
-        // ============================================================
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            let isFormValid = true;
-            const errors = [];
-
-            // Validar todos los campos visibles y requeridos
-            allInputs.forEach(input => {
-                // Solo validar si el campo está visible y es requerido
-                const isVisible = input.offsetParent !== null;
-                if (isVisible && input.hasAttribute('required')) {
-                    if (!validateField(input)) {
-                        isFormValid = false;
-                        errors.push(input);
-                    }
-                }
-            });
-
-            // Validar archivo
-            if (!fileInput.files || fileInput.files.length === 0) {
-                isFormValid = false;
-                const errorMsg = fileInput.parentElement.querySelector('.error-message');
-                if (errorMsg) {
-                    errorMsg.classList.add('show');
-                }
-                errors.push(fileInput);
-            }
-
-            // Si hay errores, hacer scroll al primero
-            if (!isFormValid) {
-                alert('Por favor completa todos los campos obligatorios correctamente');
-                if (errors.length > 0) {
-                    errors[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    errors[0].focus();
-                }
-                return false;
-            }
-
-            // Si todo es válido, mostrar mensaje de éxito
-            alert('¡Formulario enviado correctamente!');
-            // Aquí puedes agregar la lógica para enviar los datos al servidor
-            // form.submit();
-        });
+       
 
         // ============================================================
         // LÓGICA DE TIPO DE INGRESO (AMERICANA VS FUNDETEC)
@@ -2206,7 +2751,364 @@
             }
         });
 
+        // ============================================================
+        // MODAL DE CONFIRMACIÓN
+        // ============================================================
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let isFormValid = true;
+            const errors = [];
+
+            // Validar todos los campos visibles y requeridos
+            allInputs.forEach(input => {
+                const isVisible = input.offsetParent !== null;
+                if (isVisible && input.hasAttribute('required')) {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                        errors.push(input);
+                    }
+                }
+            });
+
+            // Validar archivo
+            if (!fileInput.files || fileInput.files.length === 0) {
+                isFormValid = false;
+                const errorMsg = fileInput.parentElement.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.classList.add('show');
+                }
+                errors.push(fileInput);
+            }
+
+            // Si hay errores, hacer scroll al primero
+            if (!isFormValid) {
+                alert('Por favor completa todos los campos obligatorios correctamente');
+                if (errors.length > 0) {
+                    errors[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    errors[0].focus();
+                }
+                return false;
+            }
+
+            // Si todo es válido, mostrar modal de confirmación
+            mostrarModalConfirmacion();
+        });
+
+        // ============================================================
+        // FUNCIÃN PARA MOSTRAR EL MODAL CON TODOS LOS DATOS
+        // ============================================================
+
+        function mostrarModalConfirmacion() {
+            const modal = document.getElementById('confirmacionModal');
+            
+            // Capturar valores básicos
+            const tipoIngreso = document.getElementById('tipoIngreso').value;
+            document.getElementById('confirm-tipoIngreso').textContent = 
+                tipoIngreso === 'americana' ? 'Ingreso a Americana' : 'Ingreso a Fundetec';
+            
+            document.getElementById('confirm-codigoOrientador').textContent = 
+                document.getElementById('codigoOrientador').value;
+            
+            // Tipo de suscripción (solo si está visible)
+            const tipoSuscripcionContainer = document.getElementById('confirm-tipoSuscripcion-container');
+            const tipoSuscripcionValue = document.getElementById('tipoSuscripcion').value;
+            if (tipoSuscripcionValue) {
+                tipoSuscripcionContainer.style.display = 'block';
+                document.getElementById('confirm-tipoSuscripcion').textContent = tipoSuscripcionValue;
+            } else {
+                tipoSuscripcionContainer.style.display = 'none';
+            }
+            
+            // Información del suscriptor
+            document.getElementById('confirm-nombres').textContent = 
+                document.getElementById('nombres').value;
+            document.getElementById('confirm-apellidos').textContent = 
+                document.getElementById('apellidos').value;
+            document.getElementById('confirm-tipoDocumento').textContent = 
+                document.getElementById('tipoDocumento').value;
+            document.getElementById('confirm-numeroIdentificacion').textContent = 
+                document.getElementById('numeroIdentificacion').value;
+            document.getElementById('confirm-lugarNacimiento').textContent = 
+                document.getElementById('lugarNacimiento').value;
+            document.getElementById('confirm-fechaNacimiento').textContent = 
+                formatearFecha(document.getElementById('fechaNacimiento').value);
+            
+            // Datos demográficos
+            document.getElementById('confirm-ciudadResidencia').textContent = 
+                document.getElementById('ciudadResidencia').value;
+            document.getElementById('confirm-direccion').textContent = 
+                document.getElementById('direccion').value;
+            document.getElementById('confirm-barrio').textContent = 
+                document.getElementById('barrio').value;
+            document.getElementById('confirm-estrato').textContent = 
+                document.getElementById('estrato').value;
+            
+            // Localidad (solo si está visible)
+            const localidadContainer = document.getElementById('confirm-localidad-container');
+            const localidadValue = document.getElementById('localidad').value;
+            if (localidadValue) {
+                localidadContainer.style.display = 'block';
+                document.getElementById('confirm-localidad').textContent = localidadValue;
+            } else {
+                localidadContainer.style.display = 'none';
+            }
+            
+            document.getElementById('confirm-telefonoCelular').textContent = 
+                document.getElementById('telefonoCelular').value;
+            document.getElementById('confirm-correoElectronico').textContent = 
+                document.getElementById('correoElectronico').value;
+            document.getElementById('confirm-tipoSangre').textContent = 
+                document.getElementById('tipoSangre').value;
+            document.getElementById('confirm-victimaConflicto').textContent = 
+                document.getElementById('victimaConflicto').value;
+            document.getElementById('confirm-estadoCivil').textContent = 
+                document.getElementById('estadoCivil').value;
+            
+            // Sección Periodo
+            const seccionPeriodoModal = document.getElementById('confirm-seccion-periodo');
+            const seccionPeriodoForm = document.querySelector('.seccion-periodo');
+            if (seccionPeriodoForm.style.display !== 'none') {
+                seccionPeriodoModal.style.display = 'block';
+                
+                let periodoValue, tiempoEstudioValue, metodologiaValue;
+                
+                if (tipoIngreso === 'americana') {
+                    periodoValue = document.getElementById('periodoAmericana').value;
+                    tiempoEstudioValue = document.getElementById('tiempoEstudioAmericana').value;
+                    metodologiaValue = document.getElementById('metodologiaAmericana').value;
+                } else {
+                    periodoValue = document.getElementById('periodoFundetec').value;
+                    tiempoEstudioValue = document.getElementById('tiempoEstudioFundetec').value;
+                    metodologiaValue = document.getElementById('metodologiaFundetec').value;
+                }
+                document.getElementById('confirm-periodo').textContent = periodoValue;
+            document.getElementById('confirm-tiempoEstudio').textContent = tiempoEstudioValue;
+            document.getElementById('confirm-metodologia').textContent = metodologiaValue;
+        } else {
+            seccionPeriodoModal.style.display = 'none';
+        }
+
+        // Sección Titulación
+        const seccionTitulacionModal = document.getElementById('confirm-seccion-titulacion');
+        const seccionTitulacionForm = document.querySelector('.seccion-titulacion');
+        if (seccionTitulacionForm.style.display !== 'none') {
+            seccionTitulacionModal.style.display = 'block';
+            document.getElementById('confirm-tituloObtenido').textContent = 
+                document.getElementById('tituloObtenido').value;
+        } else {
+            seccionTitulacionModal.style.display = 'none';
+        }
+
+        // Sección Programa
+        const seccionProgramaModal = document.getElementById('confirm-seccion-programa');
+        const programaGroupForm = document.querySelector('.programa-group');
+        if (programaGroupForm.style.display !== 'none') {
+            seccionProgramaModal.style.display = 'block';
+            
+            const programaInteres = document.getElementById('programaInteres');
+            const programaTexto = programaInteres.options[programaInteres.selectedIndex].text;
+            document.getElementById('confirm-programaInteres').textContent = programaTexto;
+            
+            document.getElementById('confirm-metodoPago').textContent = 
+                document.getElementById('metodoPago').value;
+            
+            // Valor cesantías (solo si está visible)
+            const cesantiasContainer = document.getElementById('confirm-valorCesantias-container');
+            const cesantiasValue = document.getElementById('valorCesantias').value;
+            if (cesantiasValue) {
+                cesantiasContainer.style.display = 'block';
+                document.getElementById('confirm-valorCesantias').textContent = 
+                    formatearMoneda(cesantiasValue);
+            } else {
+                cesantiasContainer.style.display = 'none';
+            }
+        } else {
+            seccionProgramaModal.style.display = 'none';
+        }
+
+        // Información de inscripción
+        document.getElementById('confirm-fechaPago').textContent = 
+            formatearFecha(document.getElementById('fechaPago').value);
+        document.getElementById('confirm-formaPagoInscripcion').textContent = 
+            document.getElementById('formaPagoInscripcion').value;
+        document.getElementById('confirm-valorInscripcion').textContent = 
+            formatearMoneda(document.getElementById('valorInscripcion').value);
+
+        // Obsequio (solo si está visible)
+        const obsequioContainer = document.getElementById('confirm-obsequio-container');
+        const obsequioValue = document.getElementById('obsequioAutorizado').value;
+        if (obsequioValue) {
+            obsequioContainer.style.display = 'block';
+            document.getElementById('confirm-obsequioAutorizado').textContent = obsequioValue;
+        } else {
+            obsequioContainer.style.display = 'none';
+        }
+
+        // Comprobante
+        const comprobanteFile = document.getElementById('comprobanteFile').files[0];
+        if (comprobanteFile) {
+            document.getElementById('confirm-comprobante').textContent = 
+                `${comprobanteFile.name} (${(comprobanteFile.size / 1024 / 1024).toFixed(2)} MB)`;
+        }
+
+        // Observaciones (solo si tiene contenido)
+        const observacionesValue = document.getElementById('observaciones').value.trim();
+        const seccionObservaciones = document.getElementById('confirm-seccion-observaciones');
+        if (observacionesValue) {
+            seccionObservaciones.style.display = 'block';
+            document.getElementById('confirm-observaciones').textContent = observacionesValue;
+        } else {
+            seccionObservaciones.style.display = 'none';
+        }
+
+        // Mostrar el modal
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+        }
+        // ============================================================
+        // FUNCIONES AUXILIARES PARA FORMATEO
+        // ============================================================
+        function formatearFecha(fechaISO) {
+        if (!fechaISO) return '';
+        const fecha = new Date(fechaISO + 'T00:00:00');
+        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+        return fecha.toLocaleDateString('es-ES', opciones);
+        }
+        function formatearMoneda(valor) {
+        if (!valor) return '';
+        return new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+        }).format(valor);
+        }
+        // ============================================================
+        // EVENT LISTENERS PARA LOS BOTONES DEL MODAL
+        // ============================================================
+        // Cerrar modal con X
+        document.getElementById('cerrarModal').addEventListener('click', function() {
+        cerrarModal();
+        });
+        // Botón "Editar / Volver"
+        document.getElementById('editarFormulario').addEventListener('click', function() {
+        cerrarModal();
+        });
+        // Botón "Confirmar y Enviar"
+        document.getElementById('confirmarEnvio').addEventListener('click', function() {
+            // Aquí va la lógica real de envío
+            alert('¡Formulario enviado correctamente! 🎉');
+            
+            // Cerrar modal
+            cerrarModal();
+            
+            // RESETEAR COMPLETAMENTE EL FORMULARIO
+            resetearFormularioCompleto();
+            
+            // Hacer scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Aquí puedes agregar la lógica para enviar al servidor
+            // Por ejemplo: una petición Fetch/AJAX antes del reseteo
+        });
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+        const modal = document.getElementById('confirmacionModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = ''; // Restaurar scroll del body
+        }
+        // Cerrar modal al hacer clic fuera del contenido
+        document.getElementById('confirmacionModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+        cerrarModal();
+        }
+        });
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+        const modal = document.getElementById('confirmacionModal');
+        if (modal.classList.contains('show')) {
+        cerrarModal();
+        }
+        }
+        });
+
+        // ============================================================
+        // FUNCIÓN PARA RESETEAR COMPLETAMENTE EL FORMULARIO
+        // ============================================================
+        function resetearFormularioCompleto() {
+            // 1. Resetear el formulario HTML básico
+            form.reset();
+            
+            // 2. Resetear archivo
+            fileInput.value = '';
+            fileUploadArea.style.display = 'block';
+            fileSelected.style.display = 'none';
+            
+            // 3. Limpiar campos ocultos de autocompletado
+            document.getElementById('lugarNacimientoValue').value = '';
+            document.getElementById('ciudadResidenciaValue').value = '';
+            
+            // 4. Cerrar listas de autocompletado si están abiertas
+            document.getElementById('lugarNacimientoList').classList.remove('show');
+            document.getElementById('ciudadResidenciaList').classList.remove('show');
+            
+            // 5. Ocultar secciones condicionales
+            // Tipo de suscripción
+            tipoSuscripcionGroup.style.display = 'none';
+            tipoSuscripcionSelect.removeAttribute('required');
+            
+            // Localidad
+            document.getElementById('localidadGroup').classList.remove('show');
+            document.getElementById('localidad').removeAttribute('required');
+            
+            // Sección Periodo
+            document.querySelector('.seccion-periodo').style.display = 'none';
+            document.getElementById('periodoAmericana').removeAttribute('required');
+            document.getElementById('tiempoEstudioAmericana').removeAttribute('required');
+            document.getElementById('metodologiaAmericana').removeAttribute('required');
+            document.getElementById('periodoFundetec').removeAttribute('required');
+            document.getElementById('tiempoEstudioFundetec').removeAttribute('required');
+            document.getElementById('metodologiaFundetec').removeAttribute('required');
+            document.getElementById('contenidoAmericana').style.display = 'none';
+            document.getElementById('contenidoFundetec').style.display = 'none';
+            
+            // Sección Titulación
+            document.querySelector('.seccion-titulacion').style.display = 'none';
+            tituloObtenidoSelect.innerHTML = '<option value="">Selecciona el último título aprobado</option>';
+            tituloObtenidoSelect.removeAttribute('required');
+            
+            // Sección Programa
+            document.querySelector('.programa-group').style.display = 'none';
+            document.querySelector('.programa-group').classList.remove('show');
+            programaInteresSelect.innerHTML = '<option value="">Selecciona tu programa de interés</option>';
+            programaInteresSelect.removeAttribute('required');
+            document.getElementById('metodoPago').removeAttribute('required');
+            
+            // Cesantías
+            document.getElementById('cesantiasGroup').classList.remove('show');
+            document.getElementById('valorCesantias').removeAttribute('required');
+            
+            // Obsequio
+            document.getElementById('obsequioGroup').classList.remove('show');
+            document.getElementById('obsequioAutorizado').removeAttribute('required');
+            
+            // 6. Limpiar todos los mensajes de error visibles
+            document.querySelectorAll('.error-message.show').forEach(errorMsg => {
+                errorMsg.classList.remove('show');
+            });
+            
+            // 7. Limpiar clases de error en campos
+            document.querySelectorAll('.error').forEach(field => {
+                field.classList.remove('error');
+            });
+            
+            // 8. Mensaje de confirmación en consola
+            console.log('✅ Formulario reseteado completamente');
+        }
+
     </script>
 </body>
 </html>
-
